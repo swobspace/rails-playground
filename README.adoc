@@ -5,6 +5,7 @@ Rails playground for testing stimulus, javascript and new rails features.
 == HowTo
 
 .generate app
+[source,sh]
 ----
 rails new rails-playground \
   --database=sqlite3 \
