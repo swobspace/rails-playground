@@ -2,4 +2,16 @@
 
 Rails playground for testing stimulus, javascript and new rails features.
 
+== HowTo
+
+.generate app
+----
+rails new rails-playground \
+  --database=sqlite3 \
+  --skip-test \
+  --skip-jbuilder \
+  --javascript esbuild \
+  --css bootstrap
+----
+
 
