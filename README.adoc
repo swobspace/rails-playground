@@ -2,6 +2,12 @@
 
 Rails playground for testing stimulus, javascript and new rails features.
 
+Using:
+
+* rails 7.0
+* jssbundling-rails with esbuild
+* cssbundling-rails with bootstrap 5
+
 == HowTo
 
 .generate app
