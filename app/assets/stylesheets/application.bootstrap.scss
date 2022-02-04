@@ -1,1 +1,10 @@
+// set primary color before importing bootstrap
+$primary: #137970;
 @import 'bootstrap/scss/bootstrap';
+
+// add some space after bootstrap navbar
+body {
+  padding-top: 60px;
+}
+
+
