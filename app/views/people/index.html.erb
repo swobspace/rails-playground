@@ -3,12 +3,50 @@
 <h1>People</h1>
 
 <div id="people">
-  <% @people.each do |person| %>
-    <%= render person %>
-    <p>
-      <%= link_to "Show this person", person %>
-    </p>
-  <% end %>
+  <div data-controller="datatables">
+    <table id="people_table" class="table">
+      <thead>
+        <tr>
+          <th>Last name</th>
+          <th>First name</th>
+          <th>Username</th>
+          <th>Birthdate</th>
+          <th>City</th>
+          <th>Active</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @people.each do |person| %>
+          <%= content_tag(:tr, id: dom_id(person), class: dom_class(person)) do %>
+            <td><%= person.sn %></td>
+            <td><%= person.givenname %></td>
+            <td><%= person.username %></td>
+            <td><%= person.birthdate %></td>
+            <td><%= person.city %></td>
+            <td><%= person.active %></td>
+            <td><%= person.category %></td>
+            <td>
+              <%= link_to "Show this person", person %>
+            </td>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <%= link_to "New person", new_person_path %>
