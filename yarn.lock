@@ -70,10 +70,27 @@ braces@~3.0.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
-datatables.net-bs5@^1.11.4:
+datatables.net-bs5@>=1.11.3, datatables.net-bs5@^1.11.4:
   version "1.11.4"
   resolved "https://registry.yarnpkg.com/datatables.net-bs5/-/datatables.net-bs5-1.11.4.tgz#7c942f7f696f02039b20fc8245762085b90297c3"
   integrity sha512-IFezEIKzqKJmW/N8rCLfM9rddxUJmvbggdkbsMzxSS5WZkF7qhq/swokUD0ziazyTrTpPMqxTx1OIgpbGt+g6A==
+  dependencies:
+    datatables.net ">=1.11.3"
+    jquery ">=1.7"
+
+datatables.net-buttons-bs5@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/datatables.net-buttons-bs5/-/datatables.net-buttons-bs5-2.2.2.tgz#4408b6ed2aaa9d88b71500986976485006d1b4b1"
+  integrity sha512-2UBJbymi7giJ6xsh3L/8C1G3I2DzcrAd8GJKamUH5IacmX8Z2qWcoGEu67n4QsBLSOLksOeyoGRfTp+WCfUKnw==
+  dependencies:
+    datatables.net-bs5 ">=1.11.3"
+    datatables.net-buttons ">=2.0.1"
+    jquery ">=1.7"
+
+datatables.net-buttons@>=2.0.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/datatables.net-buttons/-/datatables.net-buttons-2.2.2.tgz#5fbf91c78c8fcb3a1abe32c8ef334ee2a052614b"
+  integrity sha512-YrTgBDejFSzm2CJOx0aOACXDIELBsdMFe6IR3rJqC0elJoMd6uXVQ4pRBQEge4cfWpYa5T1Majm7r6FQi0j6Jw==
   dependencies:
     datatables.net ">=1.11.3"
     jquery ">=1.7"
