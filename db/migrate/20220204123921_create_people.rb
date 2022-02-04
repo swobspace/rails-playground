@@ -7,7 +7,7 @@ class CreatePeople < ActiveRecord::Migration[7.0]
       t.date :birthdate
       t.string :city, default: ""
       t.boolean :active, default: true
-      t.belongs_to :category, null: false
+      t.belongs_to :category
 
       t.timestamps
     end

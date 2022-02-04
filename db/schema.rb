@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2022_02_04_123921) do
     t.date "birthdate"
     t.string "city", default: ""
     t.boolean "active", default: true
-    t.integer "category_id", null: false
+    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_people_on_category_id"
