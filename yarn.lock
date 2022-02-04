@@ -70,6 +70,21 @@ braces@~3.0.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
+datatables.net-bs5@^1.11.4:
+  version "1.11.4"
+  resolved "https://registry.yarnpkg.com/datatables.net-bs5/-/datatables.net-bs5-1.11.4.tgz#7c942f7f696f02039b20fc8245762085b90297c3"
+  integrity sha512-IFezEIKzqKJmW/N8rCLfM9rddxUJmvbggdkbsMzxSS5WZkF7qhq/swokUD0ziazyTrTpPMqxTx1OIgpbGt+g6A==
+  dependencies:
+    datatables.net ">=1.11.3"
+    jquery ">=1.7"
+
+datatables.net@>=1.11.3:
+  version "1.11.4"
+  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.11.4.tgz#5f3e1ec134fa532e794fbd47c13f8333d7a5c455"
+  integrity sha512-z9LG4O0VYOYzp+rnArLExvnUWV8ikyWBcHYZEKDfVuz7BKxQdEq4a/tpO0Trbm+FL1+RY7UEIh+UcYNY/hwGxA==
+  dependencies:
+    jquery ">=1.7"
+
 esbuild-android-arm64@0.14.18:
   version "0.14.18"
   resolved "https://registry.yarnpkg.com/esbuild-android-arm64/-/esbuild-android-arm64-0.14.18.tgz#027a1cd57e57c6219341e116c4ac41a9952d69d1"
@@ -231,6 +246,11 @@ is-number@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
+
+jquery@3, jquery@>=1.7:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+  integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
