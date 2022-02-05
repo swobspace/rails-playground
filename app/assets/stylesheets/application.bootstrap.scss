@@ -1,10 +1,16 @@
-// set primary color before importing bootstrap
-$primary: #137970;
-@import 'bootstrap/scss/bootstrap';
+// @use 'trix/dist/trix.css';
+// @use 'jstree/dist/themes/default/style.css';
 
-// add some space after bootstrap navbar
-body {
-  padding-top: 60px;
-}
+@import 'datatables.net-bs5/css/dataTables.bootstrap5';
+@import 'datatables.net-buttons-bs5/css/buttons.bootstrap5';
+// @import 'actiontext';
+// @import 'flatpickr/dist/flatpickr';
+// $fa-font-path: 'fawefonts';
+// @import '@fortawesome/fontawesome-free/scss/fontawesome';
+// @import '@fortawesome/fontawesome-free/scss/brands';
+// @import '@fortawesome/fontawesome-free/scss/solid';
+// @import '@fortawesome/fontawesome-free/scss/regular';
+// @import '@fortawesome/fontawesome-free/scss/v4-shims';
+// @import 'slim-select/dist/slimselect';
 
-
+@import 'playground'
