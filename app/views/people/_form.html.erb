@@ -1,52 +1,19 @@
-<%= form_with(model: person) do |form| %>
-  <% if person.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(person.errors.count, "error") %> prohibited this person from being saved:</h2>
+<%= simple_form_for(person) do |form| %>
+  <%= form.error_notification %>
+  <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
-      <ul>
-        <% person.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="form-inputs">
+    <%= form.input :sn %>
+    <%= form.input :givenname %>
+    <%= form.input :username %>
+    <%= form.input :birthdate, html5: true %>
+    <%= form.input :city %>
+    <%= form.input :active %>
+    <%= form.association :category, include_blank: true %>
 
-  <div>
-    <%= form.label :sn, style: "display: block" %>
-    <%= form.text_field :sn %>
   </div>
 
-  <div>
-    <%= form.label :givenname, style: "display: block" %>
-    <%= form.text_field :givenname %>
-  </div>
-
-  <div>
-    <%= form.label :username, style: "display: block" %>
-    <%= form.text_field :username %>
-  </div>
-
-  <div>
-    <%= form.label :birthdate, style: "display: block" %>
-    <%= form.date_field :birthdate %>
-  </div>
-
-  <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
-  </div>
-
-  <div>
-    <%= form.label :active, style: "display: block" %>
-    <%= form.check_box :active %>
-  </div>
-
-  <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.number_field :category %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit nil, class: 'btn btn-primary' %>
   </div>
 <% end %>
