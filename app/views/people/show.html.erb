@@ -2,9 +2,8 @@
 
 <%= render @person %>
 
-<div>
-  <%= link_to "Edit this person", edit_person_path(@person) %> |
-  <%= link_to "Back to people", people_path %>
-
-  <%= button_to "Destroy this person", @person, method: :delete %>
+<div class="d-flex flex-nowrap">
+  <%= link_to "Back to people", people_path, class: "btn btn-outline-secondary me-2" %>
+  <%= edit_link(@person) %>
+  <%= delete_link(@person) %>
 </div>
