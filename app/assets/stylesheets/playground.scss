@@ -2,9 +2,28 @@
 $primary: #137970;
 @import 'bootstrap/scss/bootstrap';
 
-// add some space after bootstrap navbar
+// -- add some space after bootstrap navbar
 body {
   padding-top: 60px;
 }
+
+// -- datatables column search: place search fields below header row
+//    use <tfoot class="search">
+.table {
+  tfoot.search {
+    display: table-header-group;
+    th {
+      padding: 0.25rem;
+      input[type="text"] {
+        width: 100%;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+      }
+    }
+  }
+}
+
 
 

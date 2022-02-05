@@ -4,7 +4,7 @@
 
 <div id="people">
   <div data-controller="datatables">
-    <table id="people_table" class="table datatable">
+    <table id="people_table" class="table">
       <thead>
         <tr>
           <th>Last name</th>
@@ -12,12 +12,12 @@
           <th>Username</th>
           <th>Birthdate</th>
           <th>City</th>
-          <th>Active</th>
-          <th>Category</th>
-          <th>Actions</th>
+          <th class="notvisible">Active</th>
+          <th class="notvisible">Category</th>
+          <th class="nosort">Actions</th>
         </tr>
       </thead>
-      <tfoot>
+      <tfoot class="search">
         <tr>
           <th></th>
           <th></th>
@@ -26,7 +26,7 @@
           <th></th>
           <th></th>
           <th></th>
-          <th></th>
+          <th class="nosearch"></th>
         </tr>
       </tfoot>
       <tbody>
@@ -40,7 +40,7 @@
             <td><%= person.active %></td>
             <td><%= person.category %></td>
             <td>
-              <%= link_to "Show this person", person %>
+              <%= link_to "Show this person", person, target: '_top' %>
             </td>
           <% end %>
         <% end %>

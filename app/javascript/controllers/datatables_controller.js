@@ -30,9 +30,10 @@ export default class extends Controller {
 
   // search fields for each column
   setInputFields() {
-    this.element.querySelectorAll('table tfoot th').forEach((th, idx) => {
-      th.insertAdjacentHTML('afterbegin', this.searchField(idx))
-    })
+    this.element.querySelectorAll("table tfoot th:not([class='nosearch'])")
+        .forEach((th, idx) => {
+          th.insertAdjacentHTML('afterbegin', this.searchField(idx))
+        })
   }
 
   // single search input field
@@ -49,23 +50,22 @@ export default class extends Controller {
     options.stateSave = false
     options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     options.buttons = [ { "extend": 'copy',
-	                    "exportOptions": {
-	                      "columns": ':visible',
-	                      "search": ':applied' } },
-                          { "extend": 'csv',
-	                    "exportOptions": { "search": ':applied' } },
-                          { "extend": 'excel',
-	                    "exportOptions": { "search": ':applied' } },
-                          { "extend": 'pdf',
-	                    "orientation": 'landscape',
-	                    "pageSize": 'A4',
-	                    "exportOptions": { "columns": ':visible',
-	                                       "search": ':applied' } },
-                          { "extend": 'print'},
-                          { "extend": 'colvis',
-	                      "columns": ':gt(0)' } ]
+	                  "exportOptions": {
+	                    "columns": ':visible',
+	                    "search": ':applied' } },
+                        { "extend": 'csv',
+	                  "exportOptions": { "search": ':applied' } },
+                        { "extend": 'excel',
+	                  "exportOptions": { "search": ':applied' } },
+                        { "extend": 'pdf',
+	                  "orientation": 'landscape',
+	                  "pageSize": 'A4',
+	                  "exportOptions": { "columns": ':visible',
+	                                     "search": ':applied' } },
+                        { "extend": 'print'},
+                        { "extend": 'colvis', "columns": ':gt(0)' } ]
     options.columnDefs = [ { "targets": "nosort", "orderable": false },
-                             { "targets": "notvisible", "visible": false } ]
+                           { "targets": "notvisible", "visible": false } ]
 
   }
 } // Controller
