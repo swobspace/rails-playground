@@ -12,11 +12,13 @@ export default class extends Controller {
   }
 
   connect() {
+    let dtOptions = {}
+    this.compileOptions(dtOptions)
     this.setInputFields()
     const table = $(this.element.querySelector('table'))
 
     // prepare options, optional add remote processing (not yet implemented)
-    let dtable = $(table).DataTable(this.compileOptions())
+    let dtable = $(table).DataTable(dtOptions)
 
     // process search input
     dtable.columns().eq(0).each((colIdx) => {
@@ -39,18 +41,19 @@ export default class extends Controller {
   }
 
   // datatables options
-  compileOptions() {
-    const dtOptions = {}
-    dtOptions.pagingType = "full_numbers"
-    dtOptions.dom = "<'row'<'col'l><'col'B><'col'f>>" +
+  compileOptions(options) {
+    options.pagingType = "full_numbers"
+    options.dom = "<'row'<'col'l><'col'B><'col'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col'i><'col'p>>"
-    dtOptions.stateSave = false
-    dtOptions.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
-    dtOptions.buttons = [ { "extend": 'copy',
+    options.stateSave = false
+    options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
+    options.buttons = [ { "extend": 'copy',
 	                    "exportOptions": {
 	                      "columns": ':visible',
 	                      "search": ':applied' } },
+                          { "extend": 'csv',
+	                    "exportOptions": { "search": ':applied' } },
                           { "extend": 'excel',
 	                    "exportOptions": { "search": ':applied' } },
                           { "extend": 'pdf',
@@ -61,10 +64,8 @@ export default class extends Controller {
                           { "extend": 'print'},
                           { "extend": 'colvis',
 	                      "columns": ':gt(0)' } ]
-    dtOptions.columnDefs = [ { "targets": "nosort", "orderable": false },
+    options.columnDefs = [ { "targets": "nosort", "orderable": false },
                              { "targets": "notvisible", "visible": false } ]
 
-    // return json object for datatables
-    return dtOptions
   }
 } // Controller

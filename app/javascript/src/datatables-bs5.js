@@ -1,6 +1,15 @@
 import '../src/jquery.js'
-import 'jszip'
-import 'pdfmake'
+
+// used for Excel button, CSV button doesn't need it
+import JSZip from 'jszip'
+window.JSZip = JSZip
+
+// used for PDF button
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 import DataTable from 'datatables.net-bs5'
 window.DataTable = DataTable()
 
