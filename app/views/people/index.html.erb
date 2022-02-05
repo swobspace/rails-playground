@@ -43,8 +43,10 @@
             <td><%= person.city %></td>
             <td><%= person.active %></td>
             <td><%= person.category %></td>
-            <td>
-              <%= link_to "Show this person", person, target: '_top' %>
+            <td class="d-flex flex-nowrap">
+              <%= show_link(person) %>
+              <%= edit_link(person) %>
+              <%= delete_link(person) %>
             </td>
           <% end %>
         <% end %>
