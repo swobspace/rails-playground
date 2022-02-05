@@ -33,7 +33,7 @@ class PeopleDatatable < ApplicationDatatable
   end
 
   def total_entries
-    if params[:length] == "-1"
+    if params['length'] == "-1"
       Person.count
     else
       people_query.count
@@ -50,7 +50,7 @@ class PeopleDatatable < ApplicationDatatable
   end
 
   def fetch_people
-    unless params[:length] == "-1"
+    if params['length'] == "-1"
       people = people_query
     else
       @pagy, people = pagy(people_query, page: page, items: per_page)
