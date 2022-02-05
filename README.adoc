@@ -8,10 +8,45 @@ Using:
 * jssbundling-rails with esbuild
 * cssbundling-rails with bootstrap 5
 
-== HowTo
+Have fun. If you find a bug or something to improve, open an issue or create a pull request.
+
+== Installation
+
+.Clone the repository
+----
+git clone https://github.com/swobspace/rails-playground.git
+----
+
+.Change into the directory rails-playground and install dependencies
+----
+cd rails-playground
+bundle && yarn
+----
+
+.Run the database migration and fill database with some test data
+----
+bin/rake db:migrate
+bin/rake db:seed
+----
+
+.Start the webserver
+----
+bin/dev
+----
+
+== Available Examples
+
+[cols="1,5"]
+|===
+|Category | Description
+
+|Datatables
+|Using a single stimulus controller for tables with and without buttons and for tables with server side processing
+|===
+
+== How to start fresh
 
 .generate app
-[source,sh]
 ----
 rails new rails-playground \
   --database=sqlite3 \
@@ -20,5 +55,3 @@ rails new rails-playground \
   --javascript esbuild \
   --css bootstrap
 ----
-
-
