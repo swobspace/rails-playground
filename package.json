@@ -10,6 +10,8 @@
     "datatables.net-buttons-bs5": "^2.2.2",
     "esbuild": "^0.14.18",
     "jquery": "3",
+    "jszip": "^3.7.1",
+    "pdfmake": "^0.2.4",
     "sass": "^1.49.7"
   },
   "scripts": {

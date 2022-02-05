@@ -1,5 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
+import '../src/datatables-bs5'
+
 export default class extends Controller {
 
   initialize() {
@@ -45,23 +47,24 @@ export default class extends Controller {
                     "<'row'<'col'i><'col'p>>"
     dtOptions.stateSave = false
     dtOptions.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
-//    dtOptions.set("buttons", [ { "extend": 'copy',
-//	                       "exportOptions": {
-//	                         "columns": ':visible',
-//	                         "search": ':applied' } },
-//                             { "extend": 'excelHtml5',
-//	                       "exportOptions": { "search": ':applied' } },
-//                             { "extend": 'pdf',
-//	                       "orientation": 'landscape',
-//	                       "pageSize": 'A4',
-//	                       "exportOptions": { "columns": ':visible',
-//	                                          "search": ':applied' } },
-//                             { "extend": 'print'},
-//                             { "extend": 'colvis',
-//	                       "columns": ':gt(0)' } ])
-//    dtOptions.set("columnDefs", [ { "targets": "nosort", "orderable": false },
-//                                { "targets": "notvisible", "visible": false } ])
-//    // return json object for datatables
+    dtOptions.buttons = [ { "extend": 'copy',
+	                    "exportOptions": {
+	                      "columns": ':visible',
+	                      "search": ':applied' } },
+                          { "extend": 'excel',
+	                    "exportOptions": { "search": ':applied' } },
+                          { "extend": 'pdf',
+	                    "orientation": 'landscape',
+	                    "pageSize": 'A4',
+	                    "exportOptions": { "columns": ':visible',
+	                                       "search": ':applied' } },
+                          { "extend": 'print'},
+                          { "extend": 'colvis',
+	                      "columns": ':gt(0)' } ]
+    dtOptions.columnDefs = [ { "targets": "nosort", "orderable": false },
+                             { "targets": "notvisible", "visible": false } ]
+
+    // return json object for datatables
     return dtOptions
   }
 } // Controller

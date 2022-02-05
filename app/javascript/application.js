@@ -3,5 +3,4 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
 
-import "./src/jquery"
-import "./src/datatables-bs5"
+// import "./src/jquery"

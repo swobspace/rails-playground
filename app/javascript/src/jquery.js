@@ -1,4 +1,3 @@
-import $ from 'jquery'
-window.jQuery = window.$ = $
-// import JSZip from 'jszip'
-// window.JSZip = JSZip
+import jquery from 'jquery'
+window.jQuery = jquery
+window.$ = jquery
