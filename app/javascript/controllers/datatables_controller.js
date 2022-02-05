@@ -4,7 +4,8 @@ import '../src/datatables-bs5'
 
 export default class extends Controller {
   static values = {
-    simple: Boolean
+    simple: Boolean,
+    url: String
   }
 
   initialize() {
@@ -48,16 +49,22 @@ export default class extends Controller {
 
   // datatables options
   compileOptions(options) {
+    // common options
     options.pagingType = "full_numbers"
     options.stateSave = false
     options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     options.columnDefs = [ { "targets": "nosort", "orderable": false },
                            { "targets": "notvisible", "visible": false } ]
-
+    // with or without buttons
     if (this.simpleValue) {
       this.simpleOptions(options)
     } else {
       this.buttonOptions(options)
+    }
+
+    // remote fetch via ajax or plain html data
+    if (this.hasUrlValue) {
+      this.remoteOptions(options)
     }
   }
 
@@ -87,5 +94,12 @@ export default class extends Controller {
 	                                     "search": ':applied' } },
                         { "extend": 'print'},
                         { "extend": 'colvis', "columns": ':gt(0)' } ]
+  }
+
+  remoteOptions(options) {
+    options.searchDelay = 400
+    options.processing = true
+    options.serverSide = true
+    options.ajax = { "url": this.urlValue, "type": "POST" }
   }
 } // Controller

@@ -10,6 +10,14 @@ class PeopleController < ApplicationController
     @people = Person.all
   end
 
+  def remote_index
+    @people = Person.includes(:category).all
+    respond_to do |format|
+      format.html
+      format.json { render json: PeopleDatatable.new(@people, view_context) }
+    end
+  end
+
   # GET /people/1
   def show
   end
@@ -57,6 +65,6 @@ class PeopleController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def person_params
-      params.require(:person).permit(:sn, :givenname, :username, :birthdate, :city, :active, :category)
+      params.require(:person).permit(:sn, :givenname, :username, :birthdate, :city, :active, :category_id)
     end
 end

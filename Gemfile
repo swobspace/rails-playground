@@ -68,3 +68,5 @@ end
 gem "faker", "~> 2.19"
 
 gem "simple_form", "~> 5.1"
+
+gem "pagy", "~> 5.10"

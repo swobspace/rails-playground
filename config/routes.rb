@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   resources :categories
+  post "people/remote_index", to: "people#remote_index", constraints: lambda {|req| req.format == :json}
   resources :people do
     collection do
-      get 'simple_index'
+      get :simple_index
+      get :remote_index
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

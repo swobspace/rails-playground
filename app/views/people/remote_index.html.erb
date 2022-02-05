@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>People</h1>
+
+<p>
+<i class="fas fa-info-circle"></i> A full example with buttons and column search.
+</p>
+
+<div id="people" class="mb-3">
+  <div data-controller="datatables" 
+       data-datatables-url-value="<%= remote_index_people_path(format: :json) %>">
+    <table id="remote_people_table" class="table">
+      <thead>
+        <tr>
+          <th>Last name</th>
+          <th>First name</th>
+          <th>Username</th>
+          <th>Birthdate</th>
+          <th>City</th>
+          <th class="notvisible">Active</th>
+          <th class="notvisible">Category</th>
+          <th class="nosort">Actions</th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= link_to "New person", new_person_path %>
