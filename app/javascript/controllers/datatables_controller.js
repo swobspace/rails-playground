@@ -54,7 +54,8 @@ export default class extends Controller {
     options.stateSave = false
     options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     options.columnDefs = [ { "targets": "nosort", "orderable": false },
-                           { "targets": "notvisible", "visible": false } ]
+                           { "targets": "notvisible", "visible": false },
+                           { "targets": "actions", "className": "actions" } ]
     // with or without buttons
     if (this.simpleValue) {
       this.simpleOptions(options)

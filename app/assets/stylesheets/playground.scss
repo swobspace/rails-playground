@@ -25,5 +25,12 @@ body {
   }
 }
 
-
-
+// -- datatables: set class nowrap via columnDefs, but
+//    avoid collapsing cell if there is no search input (class "nosearch")
+.actions {
+  display: flex;
+  flex-wrap: nowrap;
+  &.nosearch {
+    display: table-cell;
+  }
+}

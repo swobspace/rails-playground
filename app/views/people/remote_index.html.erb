@@ -2,9 +2,10 @@
 
 <h1>People</h1>
 
-<p>
-<i class="fas fa-info-circle"></i> A full example with buttons and column search.
-</p>
+<div class="alert alert-info alert-dismissible fade show">
+  <i class="fas fa-info-circle"></i> Datatables with server side processing.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
 <div id="people" class="mb-3">
   <div data-controller="datatables" 
@@ -19,7 +20,7 @@
           <th>City</th>
           <th class="notvisible">Active</th>
           <th class="notvisible">Category</th>
-          <th class="nosort">Actions</th>
+          <th class="nosort actions">Actions</th>
         </tr>
       </thead>
       <tfoot class="search">
@@ -31,7 +32,7 @@
           <th></th>
           <th></th>
           <th></th>
-          <th class="nosearch"></th>
+          <th class="nosearch"> </th>
         </tr>
       </tfoot>
       <tbody>
