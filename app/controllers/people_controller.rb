@@ -6,6 +6,10 @@ class PeopleController < ApplicationController
     @people = Person.all
   end
 
+  def simple_index
+    @people = Person.all
+  end
+
   # GET /people/1
   def show
   end

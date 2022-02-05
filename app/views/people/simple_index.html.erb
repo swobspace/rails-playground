@@ -3,7 +3,7 @@
 <h1>People</h1>
 
 <div id="people" class="mb-3">
-  <div data-controller="datatables">
+  <div data-controller="datatables" data-datatables-simple-value="true">
     <table id="people_table" class="table">
       <thead>
         <tr>
@@ -17,18 +17,6 @@
           <th class="nosort">Actions</th>
         </tr>
       </thead>
-      <tfoot class="search">
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th class="nosearch"></th>
-        </tr>
-      </tfoot>
       <tbody>
         <% @people.each do |person| %>
           <%= content_tag(:tr, id: dom_id(person), class: dom_class(person)) do %>
