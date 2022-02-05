@@ -3,6 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 import '../src/datatables-bs5'
 
 export default class extends Controller {
+  static values = {
+    simple: Boolean
+  }
 
   initialize() {
     var myTable = $.fn.dataTable;
@@ -14,7 +17,9 @@ export default class extends Controller {
   connect() {
     let dtOptions = {}
     this.compileOptions(dtOptions)
-    this.setInputFields()
+    if (!this.simpleValue) {
+      this.setInputFields()
+    }
     const table = $(this.element.querySelector('table'))
 
     // prepare options, optional add remote processing (not yet implemented)
@@ -44,11 +49,29 @@ export default class extends Controller {
   // datatables options
   compileOptions(options) {
     options.pagingType = "full_numbers"
+    options.stateSave = false
+    options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
+    options.columnDefs = [ { "targets": "nosort", "orderable": false },
+                           { "targets": "notvisible", "visible": false } ]
+
+    if (this.simpleValue) {
+      this.simpleOptions(options)
+    } else {
+      this.buttonOptions(options)
+    }
+  }
+
+  simpleOptions(options) {
+    options.dom =  "<'row'<'col-sm-12'tr>>" +
+                   "<'row'<'col pt-2'l><'col'i><'col'p>>"
+    options.pagingType = "numbers"
+  }
+
+
+  buttonOptions(options) {
     options.dom = "<'row'<'col'l><'col'B><'col'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col'i><'col'p>>"
-    options.stateSave = false
-    options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     options.buttons = [ { "extend": 'copy',
 	                  "exportOptions": {
 	                    "columns": ':visible',
@@ -64,8 +87,5 @@ export default class extends Controller {
 	                                     "search": ':applied' } },
                         { "extend": 'print'},
                         { "extend": 'colvis', "columns": ':gt(0)' } ]
-    options.columnDefs = [ { "targets": "nosort", "orderable": false },
-                           { "targets": "notvisible", "visible": false } ]
-
   }
 } // Controller
