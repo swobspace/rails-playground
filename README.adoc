@@ -2,6 +2,8 @@
 
 Rails playground for testing stimulus, javascript and new rails features.
 
+https://swobspace.github.io/rails-playground
+
 Using:
 
 * rails 7.0
@@ -44,7 +46,8 @@ bin/dev
 |Using a single stimulus controller for 3 different scenarios: html tables with and without buttons and for tables with server side processing (fetching data via ajax)
 |===
 
-== How to start fresh
+////
+ == How to start fresh
 
 .generate app
 ----
@@ -55,3 +58,4 @@ rails new rails-playground \
   --javascript esbuild \
   --css bootstrap
 ----
+////
