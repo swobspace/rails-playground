@@ -1,0 +1,15 @@
+name: playbook
+title: Rails Playbook
+version: ~
+nav:
+- modules/ROOT/nav.adoc
+
+asciidoc:
+  attributes:
+    lang: en
+    author: Wolfgang Barth
+    Email: wob@swobspace.net
+    revision: 0.0.1
+    revdate: 2022-02-06
+    rights:  Copyright 2022 (C) Wolfgang Barth
+    language: en
