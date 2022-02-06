@@ -1,4 +1,67 @@
 = Rails Playground
 
-Rails playground for testing stimulus, javascript and new rails features.
+A Rails playground for testing stimulus, javascript and new rails features like turbo-rails, actiontext and more.
 
+This Rails app uses:
+
+* rails 7.0
+* jssbundling-rails with esbuild
+* cssbundling-rails
+* bootstrap 5.x
+* simple_form
+
+Have fun. If you find a bug or something to improve, open an issue or create a pull request.
+
+* Repository: https://github.com/swobspace/rails-playground
+* Online documentation: https://swobspace.github.io/rails-playground/playbook
+
+== Installation
+
+
+
+.Clone the repository
+----
+git clone https://github.com/swobspace/rails-playground.git
+----
+
+.Change into the directory `rails-playground` and install dependencies
+----
+cd rails-playground
+bundle && yarn
+----
+
+.Run the database migration and fill database with some test data
+----
+bin/rake db:migrate
+bin/rake db:seed
+----
+If you want to change the number of generated records, change `db/seeds.rb` to your needs. Default is 100. You can simple run `bin/rake db:seed` multiple times to get a multiple of 100 data sets.
+
+.Start the webserver
+----
+bin/dev
+----
+
+== Available Examples
+
+[cols="1,5"]
+|===
+|Category | Description
+
+|xref:datatables/index.adoc[Datatables]
+|Using a single stimulus controller for 3 different scenarios: html tables with and without buttons and for tables with server side processing (fetching data via ajax)
+|===
+
+////
+ == How to start fresh
+
+.generate app
+----
+rails new rails-playground \
+  --database=sqlite3 \
+  --skip-test \
+  --skip-jbuilder \
+  --javascript esbuild \
+  --css bootstrap
+----
+////

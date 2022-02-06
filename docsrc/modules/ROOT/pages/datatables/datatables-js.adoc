@@ -1,0 +1,29 @@
+= Datatables Javascript files
+:navtitle: Javascript
+:imagesdir: ../../images
+
+// Source: {github}/app/javascript/controllers/datatables_controller.js
+
+== The controller
+.app/javascript/controllers/datatables_controller.js
+[source,javascript]
+----
+include::example$app/javascript/controllers/datatables_controller.js[]
+----
+
+== Helpers
+
+=== jquery preloader
+
+.app/javascript/src/jquery.js
+[source,javascript]
+----
+include::example$app/javascript/src/jquery.js[]
+----
+
+=== Datatables modules
+.app/javascript/src/datatables-bs5.js
+[source,javascript]
+----
+include::example$app/javascript/src/datatables-bs5.js[]
+----

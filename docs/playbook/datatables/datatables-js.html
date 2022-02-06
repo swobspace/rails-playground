@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Datatables Javascript files :: Rails Playbook</title>
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Rails Playbook</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Rails Playbook</div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="playbook" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Rails Playbook</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Datatables</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="datatables-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Rails Playbook</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Rails Playbook</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Rails Playbook</a></li>
+    <li><a href="index.html">Datatables</a></li>
+    <li><a href="datatables-js.html">Javascript</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Datatables Javascript files</h1>
+<div class="sect1">
+<h2 id="_the_controller"><a class="anchor" href="#_the_controller"></a>The controller</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">app/javascript/controllers/datatables_controller.js</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import { Controller } from "@hotwired/stimulus"
+
+import '../src/datatables-bs5'
+
+export default class extends Controller {
+  static values = {
+    simple: Boolean,
+    url: String
+  }
+
+  initialize() {
+    var myTable = $.fn.dataTable;
+    $.extend( true, myTable.Buttons.defaults, {
+      "dom": { "button": { "className": 'btn btn-outline-secondary btn-sm' } }
+    })
+  }
+
+  connect() {
+    let dtOptions = {}
+    this.compileOptions(dtOptions)
+    if (!this.simpleValue) {
+      this.setInputFields()
+    }
+    const table = $(this.element.querySelector('table'))
+
+    // prepare options, optional add remote processing (not yet implemented)
+    let dtable = $(table).DataTable(dtOptions)
+
+    // process search input
+    dtable.columns().eq(0).each((colIdx) =&gt; {
+      $('input[name=idx'+colIdx+']').on( 'keyup change', function() {
+	dtable.column(colIdx).search(this.value).draw()
+      })
+    })
+  } // connect
+
+  // search fields for each column
+  setInputFields() {
+    this.element.querySelectorAll("table tfoot th:not([class='nosearch'])")
+        .forEach((th, idx) =&gt; {
+          th.insertAdjacentHTML('afterbegin', this.searchField(idx))
+        })
+  }
+
+  // single search input field
+  searchField(idx) {
+    return `&lt;input type="text" placeholder="search" name="idx${idx}" /&gt;`
+  }
+
+  // datatables options
+  compileOptions(options) {
+    // common options
+    options.pagingType = "full_numbers"
+    options.stateSave = false
+    options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
+    options.columnDefs = [ { "targets": "nosort", "orderable": false },
+                           { "targets": "notvisible", "visible": false },
+                           { "targets": "actions", "className": "actions" } ]
+    // with or without buttons
+    if (this.simpleValue) {
+      this.simpleOptions(options)
+    } else {
+      this.buttonOptions(options)
+    }
+
+    // remote fetch via ajax or plain html data
+    if (this.hasUrlValue) {
+      this.remoteOptions(options)
+    }
+  }
+
+  simpleOptions(options) {
+    options.dom =  "&lt;'row'&lt;'col-sm-12'tr&gt;&gt;" +
+                   "&lt;'row'&lt;'col pt-2'l&gt;&lt;'col'i&gt;&lt;'col'p&gt;&gt;"
+    options.pagingType = "numbers"
+  }
+
+
+  buttonOptions(options) {
+    options.dom = "&lt;'row'&lt;'col'l&gt;&lt;'col'B&gt;&lt;'col'f&gt;&gt;" +
+                    "&lt;'row'&lt;'col-sm-12'tr&gt;&gt;" +
+                    "&lt;'row'&lt;'col'i&gt;&lt;'col'p&gt;&gt;"
+    options.buttons = [ { "extend": 'copy',
+	                  "exportOptions": {
+	                    "columns": ':visible',
+	                    "search": ':applied' } },
+                        { "extend": 'csv',
+	                  "exportOptions": { "search": ':applied' } },
+                        { "extend": 'excel',
+	                  "exportOptions": { "search": ':applied' } },
+                        { "extend": 'pdf',
+	                  "orientation": 'landscape',
+	                  "pageSize": 'A4',
+	                  "exportOptions": { "columns": ':visible',
+	                                     "search": ':applied' } },
+                        { "extend": 'print'},
+                        { "extend": 'colvis', "columns": ':gt(0)' } ]
+  }
+
+  remoteOptions(options) {
+    options.searchDelay = 400
+    options.processing = true
+    options.serverSide = true
+    options.ajax = { "url": this.urlValue, "type": "POST" }
+  }
+} // Controller</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_helpers"><a class="anchor" href="#_helpers"></a>Helpers</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_jquery_preloader"><a class="anchor" href="#_jquery_preloader"></a>jquery preloader</h3>
+<div class="listingblock">
+<div class="title">app/javascript/src/jquery.js</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import jquery from 'jquery'
+window.jQuery = jquery
+window.$ = jquery</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_datatables_modules"><a class="anchor" href="#_datatables_modules"></a>Datatables modules</h3>
+<div class="listingblock">
+<div class="title">app/javascript/src/datatables-bs5.js</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import '../src/jquery.js'
+
+// used for Excel button, CSV button doesn't need it
+import JSZip from 'jszip'
+window.JSZip = JSZip
+
+// used for PDF button
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
+import DataTable from 'datatables.net-bs5'
+window.DataTable = DataTable()
+
+import buttons from 'datatables.net-buttons-bs5'
+buttons(window, $)
+
+import columnVisibility from 'datatables.net-buttons/js/buttons.colVis.js'
+columnVisibility(window, $)
+
+import buttonsHtml5 from 'datatables.net-buttons/js/buttons.html5.js'
+buttonsHtml5(window, $)
+
+import buttonsPrint from 'datatables.net-buttons/js/buttons.print.js'
+buttonsPrint(window, $)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2021</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

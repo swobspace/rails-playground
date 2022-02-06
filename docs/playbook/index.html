@@ -32,7 +32,27 @@
 <div class="nav-container" data-component="playbook" data-version="">
   <aside class="nav">
     <div class="panels">
-<div class="nav-panel-explore is-active" data-panel="explore">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Rails Playbook</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="datatables/index.html">Datatables</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="datatables/datatables-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
   <div class="context">
     <span class="title">Rails Playbook</span>
     <span class="version">default</span>
@@ -56,6 +76,10 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link is-current"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Rails Playbook</a></li>
+    <li><a href="index.html">Rails Playground</a></li>
+  </ul>
 </nav>
 </div>
   <div class="content">
@@ -64,8 +88,104 @@
 </aside>
 <article class="doc">
 <h1 class="page">Rails Playground</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Rails playground for testing stimulus, javascript and new rails features.</p>
+<p>A Rails playground for testing stimulus, javascript and new rails features like turbo-rails, actiontext and more.</p>
+</div>
+<div class="paragraph">
+<p>This Rails app uses:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>rails 7.0</p>
+</li>
+<li>
+<p>jssbundling-rails with esbuild</p>
+</li>
+<li>
+<p>cssbundling-rails</p>
+</li>
+<li>
+<p>bootstrap 5.x</p>
+</li>
+<li>
+<p>simple_form</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Have fun. If you find a bug or something to improve, open an issue or create a pull request.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Repository: <a href="https://github.com/swobspace/rails-playground" class="bare">https://github.com/swobspace/rails-playground</a></p>
+</li>
+<li>
+<p>Online documentation: <a href="https://swobspace.github.io/rails-playground/playbook" class="bare">https://swobspace.github.io/rails-playground/playbook</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">Clone the repository</div>
+<div class="content">
+<pre>git clone https://github.com/swobspace/rails-playground.git</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Change into the directory <code>rails-playground</code> and install dependencies</div>
+<div class="content">
+<pre>cd rails-playground
+bundle &amp;&amp; yarn</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Run the database migration and fill database with some test data</div>
+<div class="content">
+<pre>bin/rake db:migrate
+bin/rake db:seed</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to change the number of generated records, change <code>db/seeds.rb</code> to your needs. Default is 100. You can simple run <code>bin/rake db:seed</code> multiple times to get a multiple of 100 data sets.</p>
+</div>
+<div class="listingblock">
+<div class="title">Start the webserver</div>
+<div class="content">
+<pre>bin/dev</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_available_examples"><a class="anchor" href="#_available_examples"></a>Available Examples</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Category</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="datatables/index.html" class="xref page">Datatables</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Using a single stimulus controller for 3 different scenarios: html tables with and without buttons and for tables with server side processing (fetching data via ajax)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </article>
   </div>

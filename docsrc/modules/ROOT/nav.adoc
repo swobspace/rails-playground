@@ -1,1 +1,2 @@
-xref:index.adoc[]
+* xref:datatables/index.adoc[]
+** xref:datatables/datatables-js.adoc[]
