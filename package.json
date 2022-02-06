@@ -15,6 +15,10 @@
     "pdfmake": "^0.2.4",
     "sass": "^1.49.7"
   },
+  "devDependencies": {
+    "@antora/cli": "3.0.0",
+    "@antora/site-generator": "3.0.0"
+  },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
     "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
