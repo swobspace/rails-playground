@@ -2,8 +2,8 @@
   <div class="card">
     <div class="card-body">
       <%%= simple_form_for(@<%= singular_table_name %>) do |form| %>
-      <%%= f.error_notification %>
-      <%%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <%%= form.error_notification %>
+      <%%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
         <div class="form-input">
          <%- attributes.each do |attribute| -%>
@@ -14,7 +14,7 @@
 
         <div class="form-actions">
           <%%= form.button :submit, class: 'btn btn-primary' %>
-          <%%= cancel_button %>
+          <%%= back_link %>
         </div>
       <%% end %>
     </div>
