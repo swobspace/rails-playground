@@ -4,3 +4,5 @@ import "./controllers"
 import * as bootstrap from "bootstrap"
 
 // import "./src/jquery"
+import "trix"
+import "@rails/actiontext"
