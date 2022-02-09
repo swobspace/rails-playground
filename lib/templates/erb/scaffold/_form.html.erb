@@ -1,15 +1,18 @@
-<%# frozen_string_literal: true %>
-<%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
-  <%%= f.error_notification %>
-  <%%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<div class="container">
+  <%%= simple_form_for(@<%= singular_table_name %>,
+    html: { class: 'form-horizontal card' }) do |f| %>
 
-  <div class="form-inputs">
-  <%- attributes.each do |attribute| -%>
-    <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
-  <%- end -%>
-  </div>
+    <div class="card-header">
+      <%%= form_legend %>
+    </div>
+    <div class="card-body">
+     <%- attributes.each do |attribute| -%>
+      <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %><% (attribute.field_type == :date_select) ? ', as: :string' : '' %>
+	 %>
+     <%- end -%>
 
-  <div class="form-actions">
-    <%%= f.button :submit %>
-  </div>
-<%% end %>
+      <%%= f.button :submit, class: 'btn btn-primary' %>
+      <%%= cancel_button %>
+    </div>
+  <%% end %>
+</div>
