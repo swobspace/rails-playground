@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :add_breadcrumb_show, only: [:show]
 
   # GET /posts
   def index

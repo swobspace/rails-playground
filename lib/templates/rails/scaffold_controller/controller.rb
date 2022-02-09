@@ -5,7 +5,6 @@ require_dependency "<%= namespaced_file_path %>/application_controller"
 <% module_namespacing do -%>
 class <%= controller_class_name %>Controller < ApplicationController
   before_action :set_<%= singular_table_name %>, only: [:show, :edit, :update, :destroy]
-  before_action :add_breadcrumb_show, only: [:show]
 
   # GET <%= route_url %>
   def index
