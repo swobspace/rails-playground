@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+  def back_link
+   link_to(raw(%Q[<i class="fas fa-arrow-left"></i>]), :back,
+            class: 'btn btn-outline-secondary me-2')
+  end
+
+  def new_link(obj)
+    link_to(raw(%Q[<i class="fas fa-plus"></i>]), new_polymorphic_path(obj),
+            target: '_top',
+            class: 'btn btn-outline-secondary me-2')
+  end
+
   def show_link(obj)
     link_to(raw(%Q[<i class="fas fa-eye"></i>]), polymorphic_path(obj),
             target: '_top',
