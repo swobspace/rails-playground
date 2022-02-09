@@ -70,3 +70,6 @@ gem "faker", "~> 2.19"
 gem "simple_form", "~> 5.1"
 
 gem "pagy", "~> 5.10"
+
+gem 'responders', github: 'heartcombo/responders', branch: 'main'
+
