@@ -4,7 +4,7 @@ $primary: #137970;
 
 // -- add some space after bootstrap navbar
 body {
-  padding-top: 60px;
+  padding-top: 75px;
 }
 
 // -- datatables column search: place search fields below header row
@@ -33,4 +33,8 @@ body {
   &.nosearch {
     display: table-cell;
   }
+}
+
+form.button_to {
+  display: inline-block;
 }
