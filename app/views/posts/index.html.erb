@@ -1,13 +1,9 @@
-<% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
-<% end %>
-
 <h1><%= t('controller.posts') %></h1>
 
 <div data-controller="datatables">
   <%= content_tag :table, role: :datatable,
         id: "posts_table",
-        class: "table table-bordered table-responsive-xl",
+        class: "table table-responsive-xl",
         data: {
           'datatables-target': 'datatable',
           order: [[0, 'desc']].to_json
