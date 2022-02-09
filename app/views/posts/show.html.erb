@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%= t('activerecord.models.post') %></h4>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-hover autowidth">
+    
+      <tr>
+        <th><%= t('attributes.subject')%>:</th>
+        <td><%= @post.subject %></td>
+      </tr>
+    
+      <tr>
+        <th><%= t('attributes.content')%>:</th>
+        <td><%= @post.content %></td>
+      </tr>
+        </table>
+
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@post) %>
+      <%= delete_link(@post) %>
+      <%= new_link Post %>
+    </div>
+  </div>
+</div>

@@ -8,13 +8,13 @@
         <div class="form-input">
           <%= form.input :subject
              %>
-          <%= form.input :content
+          <%= form.input :content, as: :rich_text_area
              %>
         </div>
 
         <div class="form-actions">
           <%= form.button :submit, class: 'btn btn-primary' %>
-          <%= cancel_button %>
+          <%= back_link %>
         </div>
       <% end %>
     </div>
