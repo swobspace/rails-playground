@@ -1,12 +1,15 @@
-<div id="<%= dom_id post %>">
-  <p>
-    <strong>Subject:</strong>
-    <%= post.subject %>
-  </p>
+<div class="card mb-2">
+  <div id="<%= dom_id post %>" class="card-body">
+    <div class="d-flex justify-content-between">
+      <h4 class="card-title text-muted">
+        <%= post.subject %>
+      </h4>
+      <span class="text-muted"><%= post.created_at.to_formatted_s(:db) %></span>
+    </div>
 
-  <p>
-    <strong>Content:</strong>
-    <%= post.content %>
-  </p>
+    <p>
+      <%= post.content %>
+    </p>
 
+  </div>
 </div>
