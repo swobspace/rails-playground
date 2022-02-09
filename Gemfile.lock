@@ -75,6 +75,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    ansi (1.5.0)
+    ast (2.4.2)
     bindex (0.8.1)
     bootsnap (1.10.3)
       msgpack (~> 1.2)
@@ -133,8 +135,18 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
+    oga (3.3)
+      ast
+      ruby-ll (~> 2.1)
     pagy (5.10.1)
       activesupport
+    pdf-core (0.9.0)
+    prawn (2.4.0)
+      pdf-core (~> 0.9.0)
+      ttfunk (~> 1.7)
+    prawn-html (0.6.2)
+      oga (~> 3.3)
+      prawn (~> 2.4)
     puma (5.6.1)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -171,6 +183,9 @@ GEM
     redis (4.6.0)
     reline (0.3.1)
       io-console (~> 0.5)
+    ruby-ll (2.1.2)
+      ansi
+      ast
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     simple_form (5.1.0)
@@ -189,6 +204,7 @@ GEM
     strscan (3.0.1)
     thor (1.2.1)
     timeout (0.2.0)
+    ttfunk (1.7.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -215,6 +231,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jsbundling-rails
   pagy (~> 5.10)
+  prawn-html (~> 0.6.2)
   puma (~> 5.0)
   rails (~> 7.0.1)
   redis (~> 4.0)

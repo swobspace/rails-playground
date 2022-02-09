@@ -9,7 +9,13 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    respond_with(@post)
+    respond_with(@post) do |format|
+      format.pdf do
+         pdf = Prawn::Document.new(page_size: 'A4')
+         PrawnHtml.append_html(pdf, @post.content.to_s)
+         send_data(pdf.render, type: Mime[:pdf])
+      end
+    end
   end
 
   # GET /posts/new

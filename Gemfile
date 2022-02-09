@@ -73,3 +73,5 @@ gem "pagy", "~> 5.10"
 
 gem 'responders', github: 'heartcombo/responders', branch: 'main'
 
+
+gem "prawn-html", "~> 0.6.2"
