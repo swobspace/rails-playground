@@ -5,29 +5,28 @@
         id: "posts_table",
         class: "table table-responsive-xl",
         data: {
-          'datatables-target': 'datatable',
           order: [[0, 'desc']].to_json
         } do %>
     <thead>
       <tr class="search">
-            <th><%= t('attributes.subject') %></th>
-            <th><%= t('attributes.content') %></th>
-            <th class="nosort"><%= t('mirco.action') %></th>
+        <th><%= t('attributes.subject') %></th>
+        <th><%= t('attributes.content') %></th>
+        <th class="nosort actions"><%= t('mirco.action') %></th>
       </tr>
     </thead>
-    <tfoot>
+    <tfoot class="search">
       <tr>
-            <th></th>
-            <th></th>
-            <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
       </tr>
     </tfoot>
     <tbody>
       <% @posts.each do |post| %>
         <%= content_tag(:tr, id: dom_id(post), class: dom_class(post)) do %>
-                <td><%= post.subject %></td>
-                <td><%= post.content %></td>
-                <td class="text-nowrap">
+          <td><%= post.subject %></td>
+          <td><%= post.content %></td>
+          <td class="text-nowrap">
             <%= show_link post %>
             <%= edit_link post %>
             <%= delete_link post %>

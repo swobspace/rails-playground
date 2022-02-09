@@ -9,26 +9,26 @@
         } do %>
     <thead>
       <tr class="search">
-    <% attributes.each do |attribute| -%>
+      <%- attributes.each do |attribute| -%>
         <th><%%= t('attributes.<%= attribute.name %>') %></th>
-    <% end -%>
-        <th class="nosort"><%%= t('mirco.action') %></th>
+      <%- end -%>
+        <th class="nosort actions"><%%= t('mirco.action') %></th>
       </tr>
     </thead>
-    <tfoot>
+    <tfoot class="search">
       <tr>
-       <% attributes.each do |attribute| -%>
+       <%- attributes.each do |attribute| -%>
         <th></th>
-       <% end -%>
-        <th></th>
+       <%- end -%>
+        <th class="nosearch"></th>
       </tr>
     </tfoot>
     <tbody>
       <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
         <%%= content_tag(:tr, id: dom_id(<%= singular_table_name %>), class: dom_class(<%= singular_table_name %>)) do %>
-         <% attributes.each do |attribute| -%>
+         <%- attributes.each do |attribute| -%>
           <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
-         <% end -%>
+         <%- end -%>
           <td class="text-nowrap">
             <%%= show_link <%= singular_table_name %> %>
             <%%= edit_link <%= singular_table_name %> %>
