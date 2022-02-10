@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     respond_with(@post) do |format|
       format.pdf do
         # render pdf defined in config/initializers/renderers.rb
-        render pdf: @post.content,
+        render pdf: @post,
                filename: "#{@post.created_at.to_date}-#{@post.subject}",
                page_size: 'A4'
       end
