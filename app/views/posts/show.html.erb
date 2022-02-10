@@ -1,9 +1,12 @@
 <%= render @post %>
 
 <div role="toolbar" class="form-actions">
-  <%= back_link %>
   <%= edit_link(@post) %>
   <%= delete_link(@post) %>
+  <%= link_to  "PDF", post_path(@post, format: :pdf), target: :_top, class: 'btn btn-outline-secondary me-1' %>
   <%= new_link Post %>
 </div>
+
+<%= link_to "Back to posts", posts_path %>
+
 
