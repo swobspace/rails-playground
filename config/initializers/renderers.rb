@@ -15,5 +15,5 @@ ActionController::Renderers.add :pdf do |obj, options|
     str = pdf.render
   end 
   send_data str, type: Mime[:pdf],
-    disposition: "attachment; filename=#{filename}.pdf"
+    disposition: "inline; filename=#{filename}.pdf"
 end
