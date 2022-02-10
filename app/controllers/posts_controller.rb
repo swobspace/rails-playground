@@ -11,9 +11,10 @@ class PostsController < ApplicationController
   def show
     respond_with(@post) do |format|
       format.pdf do
-         pdf = Prawn::Document.new(page_size: 'A4')
-         PrawnHtml.append_html(pdf, @post.content.to_s)
-         send_data(pdf.render, type: Mime[:pdf])
+        # render pdf defined in config/initializers/renderers.rb
+        render pdf: @post.content,
+               filename: "#{@post.created_at.to_date}-#{@post.subject}",
+               page_size: 'A4'
       end
     end
   end
