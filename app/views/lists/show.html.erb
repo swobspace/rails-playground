@@ -1,4 +1,12 @@
-<%= render @list %>
+<div class="mb-3">
+  <%= render @list %>
+</div>
+
+<h3> Tasks </h3>
+
+<div class="list-group mb-3">
+  <%= render @list.tasks %>
+</div>
 
 <div role="toolbar">
   <%= back_link %>
