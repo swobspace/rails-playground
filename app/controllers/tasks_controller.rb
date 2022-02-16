@@ -26,20 +26,29 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    @task.save
-    respond_with(@task)
+    respond_with(@task, location: location) do |format|
+      if @task.save
+        format.turbo_stream
+      end
+    end
   end
 
   # PATCH/PUT /tasks/1
   def update
-    @task.update(task_params)
-    respond_with(@task)
+   respond_with(@task, location: location) do |format|
+      if @task.update(task_params)
+        format.turbo_stream
+      end
+    end
   end
 
   # DELETE /tasks/1
   def destroy
-    @task.destroy
-    respond_with(@task)
+   respond_with(@task, location: location) do |format|
+      if @task.destroy
+        format.turbo_stream
+      end
+    end
   end
 
   private
@@ -52,4 +61,13 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:subject, :position, :list_id)
     end
+
+    def location
+      if action_name == 'destroy'
+        polymorphic_path(@taskable || :tasks)
+      else
+        polymorphic_path(@taskable || @task)
+      end
+    end
+
 end

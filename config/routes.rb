@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :tasks
-  resources :lists
+  resources :lists do
+    resources :tasks, module: :lists
+  end
   resources :posts
   resources :categories
   post "people/remote_index", to: "people#remote_index", constraints: lambda {|req| req.format == :json}

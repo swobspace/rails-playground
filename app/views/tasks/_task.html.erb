@@ -1,6 +1,6 @@
 <div id="<%= dom_id task %>" class="list-group-item" data-sortable-target="item">
   <div class="row">
-    <h5 class="col"><%= task.subject %></h5>
+    <h5 class="col">#<%= task.id %>: <%= task.subject %></h5>
     <div class="col-sm-2 text-muted text-end">
       <%=task.position %> | 
       <%= task.list %>
