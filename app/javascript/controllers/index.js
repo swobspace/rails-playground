@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
-import DatatablesController from "./datatables_controller"
+import DatatablesController from "./datatables_controller.js"
 application.register("datatables", DatatablesController)
+
+import HelloController from "./hello_controller.js"
+application.register("hello", HelloController)
+
+import SortableController from "./sortable_controller.js"
+application.register("sortable", SortableController)
