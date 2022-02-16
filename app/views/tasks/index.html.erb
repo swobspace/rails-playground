@@ -9,9 +9,9 @@
         } do %>
     <thead>
       <tr class="search">
-        <th><%= t('attributes.position') %></th>
-        <th><%= t('attributes.subject') %></th>
         <th><%= t('attributes.list') %></th>
+        <th class="text-center"><%= t('attributes.position') %></th>
+        <th><%= t('attributes.subject') %></th>
         <th class="nosort actions"><%= t('mirco.action') %></th>
       </tr>
     </thead>
@@ -26,9 +26,9 @@
     <tbody>
       <% @tasks.each do |task| %>
         <%= content_tag(:tr, id: dom_id(task), class: dom_class(task)) do %>
-          <td><%= task.position %></td>
-          <td><%= task.subject %></td>
           <td><%= task.list %></td>
+          <td class="text-center"><%= task.position %></td>
+          <td><%= task.subject %></td>
           <td class="text-nowrap">
             <%= show_link task %>
             <%= edit_link task %>
