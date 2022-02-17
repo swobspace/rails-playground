@@ -43,6 +43,8 @@ export default class extends Controller {
           },
           body: JSON.stringify(data)
         })
+        .then(r => r.text())
+        .then(html => Turbo.renderStreamMessage(html))
       })
     }
   }
