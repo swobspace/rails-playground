@@ -1,5 +1,5 @@
 class List < ApplicationRecord
-  has_many :tasks, dependent: :restrict_with_error
+  has_many :tasks, -> { order(:position) }, dependent: :restrict_with_error
 
   validates_presence_of :name
 

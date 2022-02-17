@@ -4,11 +4,8 @@
 
 <h3> Tasks </h3>
 
-<div class="list-group mb-3" 
-     data-controller="sortable" 
-     data-sortable-url-value="<%= list_tasks_path(@list) %>"
->
-  <%= render @list.tasks %>
+<div id="ts_taskable_tasks">
+  <%= render partial: 'lists/show', locals: { list: @list }%>
 </div>
 
 <div role="toolbar">
