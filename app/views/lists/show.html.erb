@@ -1,17 +1,20 @@
-<div class="mb-3">
-  <%= render @list %>
+<div class="card mb-3">
+  <div class="card-header">
+    <h3 class="card-title"><%= @list %> </h3>
+  </div>
+
+  <div = class="card-body">
+    <h4 class="card-title"> Tasks </h4>
+
+    <div id="ts_taskable_tasks">
+      <%= render partial: 'lists/show', locals: { list: @list }%>
+    </div>
+
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@list) %>
+      <%= delete_link(@list) %>
+      <%= new_link List %>
+    </div>
+  </div>
 </div>
-
-<h3> Tasks </h3>
-
-<div id="ts_taskable_tasks">
-  <%= render partial: 'lists/show', locals: { list: @list }%>
-</div>
-
-<div role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@list) %>
-  <%= delete_link(@list) %>
-  <%= new_link List %>
-</div>
-
