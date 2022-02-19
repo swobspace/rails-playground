@@ -1,9 +1,10 @@
-= A Stimulus Datatables controller
+= A stimulus datatables controller
 :navtitle: Datatables
 :imagesdir: ../../images
 
 * Source Repository: {github}
 * Datatables home page: https://datatables.net/
+* Rails Playground: used in people
 
 The goal: use one stimulus controller for 3 scenarios:
 

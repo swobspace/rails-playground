@@ -1,0 +1,92 @@
+= Sortable Stimulus Controller
+:navtitle: Javascript
+:imagesdir: ../../images
+
+== Stimulus controller
+
+[source,javascript]
+----
+if (this.hasItemTarget) { <!--1-->
+  this.itemTargets.forEach(item => {
+    item.setAttribute('style', 'z-index: 1000;') <!--2-->
+    item.classList.add('draggable-source') <!--3-->
+  })
+  ...
+}
+----
+<1> it is always better to check for the existence of any target before make use of it.
+<2> make sure our element is always on top to be draggable
+<3> set a class for draggable, default is '.draggable-source'
+
+=== Initialize Sortable
+
+[source,javascript]
+----
+const sortable = new Sortable(this.element, { <!--1-->
+  draggable: '.draggable-source', <!--2-->
+  distance: 5, <!--3-->
+  mirror: {
+    constrainDimensions: true <!--4-->
+  }
+})
+----
+<1> `this.element`: the <div> element with data-controller="sortable"
+<2> which elements should be draggable. Here: our bootstrap v5 list group inner item
+<3> how much pixel the item should be moved before draggable takes action
+<4> don't change the size of our draggable element during the move
+
+
+=== Event sortable:start
+
+[source,javascript]
+----
+sortable.on('sortable:start', function(event) {
+  let item = event.dragEvent.source
+  item.setAttribute('style', 'z-index: 1000; background-color: #FFFFAB;') <!--1-->
+})
+----
+<1> ensure our dragged item is always on top and colorize it.
+
+=== Event sortable:stop
+
+[source,javascript]
+----
+sortable.on('sortable:stop', function(event) {
+  let item = event.dragEvent.source <!--1-->
+  let item_id = item.id.substr(item.id.lastIndexOf("_")+1) <!--2-->
+  let item_type = item.id.substr(0, item.id.lastIndexOf("_")) <!--3-->
+  let url = `${_this.urlValue}/${item_id}`<!--4-->
+  let data = {[item_type]: { position: (event.data.newIndex + 1) }} <!--5-->
+  let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content') <!--6-->
+  fetch(url, {
+    method: 'PUT',
+    credentials: 'same-origin',
+    headers: {
+      "X-CSRF-Token": token, <!--6-->
+      "Content-type": "application/json", <!--7-->
+      "Accept": "text/vnd.turbo-stream.html" <!--8-->
+    },
+    body: JSON.stringify(data)
+  })
+  .then(r => r.text())
+  .then(html => Turbo.renderStreamMessage(html)) <!--9-->
+})
+----
+<1> the dragged item itself
+<2> extract the numeric id from dom_id(item), i.e. task_123 -> '123'
+<3> item type, i.e. task_123 -> 'task'
+<4> build the item specific url. The url value is set in the same element with `data-controller="sortable"`
+<5> build the parameter hash: with the standard controller update method we need something like {"task": { "position": <new position>}}
+<6> to overcome CSRF protection, fetch the token from the header and use it in the PUT/PATCH request.
+<7> we are sending JSON data ...
+<8> ... but we want a turbo stream response
+<9> finally render the received turbo stream message
+
+TIP: if you like a more compact ajax call, have a look at https://github.com/rails/requestjs-rails. It includes some steps as automatically use the CSRF token, but it comes with the cost of an additional dependency.
+
+=== The complete controller
+
+[source,javascript]
+----
+include::example$app/javascript/controllers/sortable_controller.js[]
+----

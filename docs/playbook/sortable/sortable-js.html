@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sortable Stimulus Controller :: Rails Playbook</title>
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Rails Playbook</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Rails Playbook</div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="playbook" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Rails Playbook</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Stimulus Controllers</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../datatables/index.html">Datatables</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../datatables/datatables-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Sortable</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="sortable-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Rails Playbook</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Rails Playbook</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Rails Playbook</a></li>
+    <li>Stimulus Controllers</li>
+    <li><a href="index.html">Sortable</a></li>
+    <li><a href="sortable-js.html">Javascript</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Sortable Stimulus Controller</h1>
+<div class="sect1">
+<h2 id="_stimulus_controller"><a class="anchor" href="#_stimulus_controller"></a>Stimulus controller</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">if (this.hasItemTarget) { <i class="conum" data-value="1"></i><b>(1)</b>
+  this.itemTargets.forEach(item =&gt; {
+    item.setAttribute('style', 'z-index: 1000;') <i class="conum" data-value="2"></i><b>(2)</b>
+    item.classList.add('draggable-source') <i class="conum" data-value="3"></i><b>(3)</b>
+  })
+  ...
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>it is always better to check for the existence of any target before make use of it.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>make sure our element is always on top to be draggable</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>set a class for draggable, default is '.draggable-source'</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_initialize_sortable"><a class="anchor" href="#_initialize_sortable"></a>Initialize Sortable</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const sortable = new Sortable(this.element, { <i class="conum" data-value="1"></i><b>(1)</b>
+  draggable: '.draggable-source', <i class="conum" data-value="2"></i><b>(2)</b>
+  distance: 5, <i class="conum" data-value="3"></i><b>(3)</b>
+  mirror: {
+    constrainDimensions: true <i class="conum" data-value="4"></i><b>(4)</b>
+  }
+})</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>this.element</code>: the &lt;div&gt; element with data-controller="sortable"</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>which elements should be draggable. Here: our bootstrap v5 list group inner item</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>how much pixel the item should be moved before draggable takes action</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>don&#8217;t change the size of our draggable element during the move</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_event_sortablestart"><a class="anchor" href="#_event_sortablestart"></a>Event sortable:start</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">sortable.on('sortable:start', function(event) {
+  let item = event.dragEvent.source
+  item.setAttribute('style', 'z-index: 1000; background-color: #FFFFAB;') <i class="conum" data-value="1"></i><b>(1)</b>
+})</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ensure our dragged item is always on top and colorize it.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_event_sortablestop"><a class="anchor" href="#_event_sortablestop"></a>Event sortable:stop</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">sortable.on('sortable:stop', function(event) {
+  let item = event.dragEvent.source <i class="conum" data-value="1"></i><b>(1)</b>
+  let item_id = item.id.substr(item.id.lastIndexOf("_")+1) <i class="conum" data-value="2"></i><b>(2)</b>
+  let item_type = item.id.substr(0, item.id.lastIndexOf("_")) <i class="conum" data-value="3"></i><b>(3)</b>
+  let url = `${_this.urlValue}/${item_id}`<i class="conum" data-value="4"></i><b>(4)</b>
+  let data = {[item_type]: { position: (event.data.newIndex + 1) }} <i class="conum" data-value="5"></i><b>(5)</b>
+  let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content') <i class="conum" data-value="6"></i><b>(6)</b>
+  fetch(url, {
+    method: 'PUT',
+    credentials: 'same-origin',
+    headers: {
+      "X-CSRF-Token": token, <i class="conum" data-value="6"></i><b>(6)</b>
+      "Content-type": "application/json", <i class="conum" data-value="7"></i><b>(7)</b>
+      "Accept": "text/vnd.turbo-stream.html" <i class="conum" data-value="8"></i><b>(8)</b>
+    },
+    body: JSON.stringify(data)
+  })
+  .then(r =&gt; r.text())
+  .then(html =&gt; Turbo.renderStreamMessage(html)) <i class="conum" data-value="9"></i><b>(9)</b>
+})</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the dragged item itself</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>extract the numeric id from dom_id(item), i.e. task_123 &#8594; '123'</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>item type, i.e. task_123 &#8594; 'task'</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>build the item specific url. The url value is set in the same element with <code>data-controller="sortable"</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>build the parameter hash: with the standard controller update method we need something like {"task": { "position": &lt;new position&gt;}}</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>to overcome CSRF protection, fetch the token from the header and use it in the PUT/PATCH request.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>we are sending JSON data &#8230;&#8203;</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>&#8230;&#8203; but we want a turbo stream response</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="9"></i><b>9</b></td>
+<td>finally render the received turbo stream message</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+if you like a more compact ajax call, have a look at <a href="https://github.com/rails/requestjs-rails" class="bare">https://github.com/rails/requestjs-rails</a>. It includes some steps as automatically use the CSRF token, but it comes with the cost of an additional dependency.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_complete_controller"><a class="anchor" href="#_the_complete_controller"></a>The complete controller</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import { Controller } from "@hotwired/stimulus"
+import { Sortable } from '@shopify/draggable';
+
+export default class extends Controller {
+  static targets = ['item']
+  static values = {
+    url: String
+  }
+
+  connect() {
+    let _this = this
+    if (this.hasItemTarget) {
+      this.itemTargets.forEach(item =&gt; {
+        item.setAttribute('style', 'z-index: 1000;')
+        item.classList.add('draggable-source')
+      })
+
+      const sortable = new Sortable(this.element, {
+        draggable: '.draggable-source',
+        distance: 5,
+        mirror: {
+          constrainDimensions: true
+        }
+      })
+      sortable.on('sortable:start', function(event) {
+        let item = event.dragEvent.source
+        item.setAttribute('style', 'z-index: 1000; background-color: #FFFFAB;')
+      })
+      sortable.on('sortable:stop', function(event) {
+        let item = event.dragEvent.source
+        // needs something like id="&lt;%= dom_id item %&gt;"
+        let item_id = item.id.substr(item.id.lastIndexOf("_")+1)
+        let item_type = item.id.substr(0, item.id.lastIndexOf("_"))
+        let url = `${_this.urlValue}/${item_id}`
+        let data = {[item_type]: { position: (event.data.newIndex + 1) }}
+        let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        fetch(url, {
+          method: 'PUT',
+          credentials: 'same-origin',
+          headers: {
+            "X-CSRF-Token": token,
+            "Accept": "text/vnd.turbo-stream.html",
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+        .then(r =&gt; r.text())
+        .then(html =&gt; Turbo.renderStreamMessage(html))
+      })
+    }
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2021</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>

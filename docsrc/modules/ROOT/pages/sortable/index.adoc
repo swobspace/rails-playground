@@ -1,0 +1,60 @@
+= A stimulus sortable controller
+:navtitle: Sortable
+:imagesdir: ../../images
+
+* Source Repository: {github}
+* Draggable/Sortable home page: https://shopify.github.io/draggable/
+* Rails Playground: used in lists
+
+The goal: make a list of tasks sortable. `@shopify/draggable` takes the client part, turbostream re-renders the list after the update. The positioning in active record uses `acts_as_list`.
+
+
+== Models
+
+[source,ruby]
+----
+include::example$app/models/list.rb[]
+----
+
+[source,ruby]
+----
+include::example$app/models/task.rb[]
+----
+
+=== Views
+
+The following snippets shows only the relevant parts. For the full views please have a look as `rails-playground/app/views/lists` and `rails-playground/app/views/tasks`.
+
+=== lists/show.html.erb
+
+[source,erb]
+----
+<div id="ts_taskable_tasks"> <!--1-->
+  <%= render partial: 'lists/show', locals: { list: @list }%>
+</div>
+----
+<1> a unique id use with `turbo_stream.update` in `app/views/tasks/update.turbo_stream.erb`
+
+=== lists/_show.html.erb
+
+[source,erb]
+----
+<div data-controller="sortable"  <!--1-->
+     data-sortable-url-value="<%= list_tasks_path(list) %>" <!--2-->
+     class="list-group mb-3">
+  <%= render partial: 'tasks/task', collection: list.tasks, as: :task %>
+</div>
+----
+<1> initialize the sortable controller
+<2> Generic path, used later with the task id, i.e. lists/1/tasks/2 for the `:update` action
+
+=== tasks/_task.html.erb
+[source,erb]
+----
+<div id="<%= dom_id task %>"  <!--1-->
+     class="list-group-item"
+     data-sortable-target="item"> <!--2-->
+...
+----
+<1> id must be dom_id(task)
+<2> stimulus target is `item`.
