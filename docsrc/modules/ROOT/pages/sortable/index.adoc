@@ -21,7 +21,7 @@ include::example$app/models/list.rb[]
 include::example$app/models/task.rb[]
 ----
 
-=== Views
+== Views
 
 The following snippets shows only the relevant parts. For the full views please have a look as `rails-playground/app/views/lists` and `rails-playground/app/views/tasks`.
 
