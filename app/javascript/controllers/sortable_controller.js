@@ -12,10 +12,11 @@ export default class extends Controller {
     if (this.hasItemTarget) {
       this.itemTargets.forEach(item => {
         item.setAttribute('style', 'z-index: 1000;')
+        item.classList.add('draggable-source')
       })
 
       const sortable = new Sortable(this.element, {
-        draggable: '.list-group-item',
+        draggable: '.draggable-source',
         distance: 5,
         mirror: {
           constrainDimensions: true
