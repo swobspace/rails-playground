@@ -77,3 +77,5 @@ gem 'responders', github: 'heartcombo/responders', branch: 'main'
 gem "prawn-html", "~> 0.6.2"
 
 gem "acts_as_list", "~> 1.0"
+
+gem "view_component", "~> 2.49"
