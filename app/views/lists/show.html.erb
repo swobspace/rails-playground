@@ -4,7 +4,11 @@
   </div>
 
   <div = class="card-body">
-    <h4 class="card-title"> Tasks </h4>
+    <div class="d-flex justify-content-between">
+      <h4 class="card-title"> Tasks </h4>
+        <%= link_to "Add Task", new_list_task_path(@list), 
+                                class: 'btn btn-outline-secondary mb-2' %>
+    </div>
 
     <div id="ts_taskable_tasks">
       <%= render partial: 'lists/show', locals: { list: @list }%>

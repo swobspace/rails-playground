@@ -1,9 +1,10 @@
 <div id="<%= dom_id task %>" class="list-group-item" data-sortable-target="item">
   <div class="row">
     <div class="col">#<%= task.id %>: <%= task.subject %></div>
-    <div class="col-sm-2 text-muted text-end">
+    <div class="col-sm-3 text-muted text-end">
       <%=task.position %> | 
-      <%= task.list %>
+      <%= task.list %> |
+      <%= delete_link([task.list, task]) %>
     </div>
   </div>
 </div>

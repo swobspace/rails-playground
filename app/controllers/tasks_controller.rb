@@ -14,7 +14,11 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    if @taskable.present?
+      @task = @taskable.tasks.build
+    else
+      @task = Task.new
+    end
     respond_with(@task)
   end
 
@@ -24,7 +28,11 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
-    @task = Task.new(task_params)
+    if @taskable.present?
+      @task = @taskable.tasks.build(task_params)
+    else
+      @task = Task.new(task_params)
+    end
 
     respond_with(@task, location: location) do |format|
       if @task.save

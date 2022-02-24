@@ -1,7 +1,7 @@
 <div class="container">
   <div class="card">
     <div class="card-body">
-      <%= simple_form_for(@task) do |form| %>
+      <%= simple_form_for([@taskable, @task]) do |form| %>
       <%= form.error_notification %>
       <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
@@ -10,7 +10,7 @@
              %>
           <%= form.input :position
              %>
-          <%= form.association :list
+          <%= form.association :list, disabled: @task.list.present?
              %>
         </div>
 

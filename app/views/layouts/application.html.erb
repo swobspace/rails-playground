@@ -11,6 +11,7 @@
   </head>
 
   <body>
+    <%= turbo_frame_tag "modal" %>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" role="navigation">
       <div class="container-fluid">
         <a class="navbar-brand" href="<%= root_path if defined?(root_path)%>#">Rails Playground</a>
