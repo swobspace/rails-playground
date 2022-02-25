@@ -1,0 +1,82 @@
+= A stimulus controller for Bootstrap v5 Modal
+:navtitle: Modal
+:imagesdir: ../../images
+
+* Source Repository: {github}
+* Bootstrap v5 Modal: https://getbootstrap.com/docs/5.1/components/modal/
+* Rails Playground: used in lists
+
+The goal: get bootstrap modal working with turbo_stream
+
+
+== Models
+
+[source,ruby]
+----
+include::example$app/models/list.rb[]
+----
+
+[source,ruby]
+----
+include::example$app/models/task.rb[]
+----
+
+== Views
+
+The following snippets shows only the relevant parts. For the full views please have a look as `rails-playground/app/views/lists` and `rails-playground/app/views/tasks`.
+
+=== tasks/new.html.erb
+
+[source,erb]
+----
+<%= render ModalComponent.new(title: 'Edit Task') do %> <!--1-->
+  <%= render "form", task: @task %>
+<% end %>
+----
+<1> Use a Component for reuse the repeating modal frame stuff
+
+=== app/components/modal_component.html.erb
+
+[source,erb]
+----
+<%= turbo_frame_tag "modal" do %> <!--1-->
+  <div class="modal" tabindex="-1"
+       id="modalComponent" <!--2-->
+       data-controller="modal" <!--3-->
+       data-action="turbo:submit-end->modal#handleSubmit" <!--4-->
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><%= @title %></h5> <!--5-->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= content %> <!--6-->
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+----
+<1> use a turbo_frame tag
+<2> don't forget a unique id for this modal
+<3> initialize modal controller
+<4> handle successful form response -> close modal via `modal#handleSubmit`
+<5> title to be set in `ModalComponent.new(title: ...)`
+<6> here goes the block (`content` instead of ruby's `yield` in ViewComponent)
+
+=== app/component/modal_component.rb
+[source,ruby]
+----
+class ModalComponent < ViewComponent::Base
+  include Turbo::FramesHelper <!--1-->
+
+  def initialize(title:)
+    @title = title <!--2-->
+  end
+
+end
+----
+<1> use `turbo_frame_tag` helpers without helpers prefix
+<2> title to be set

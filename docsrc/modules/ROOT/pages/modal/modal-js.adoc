@@ -1,0 +1,53 @@
+= Stimulus Controller for Bootstrap Modal
+:navtitle: Javascript
+:imagesdir: ../../images
+
+== Stimulus controller
+
+[source,javascript]
+----
+connect() {
+  this.modal = new bootstrap.Modal(this.element)
+  this.modal.show() <!--1-->
+}
+----
+<1> Auto-open modal on connect
+
+=== #close function
+
+[source,javascript]
+----
+close() {
+  this.modal.hide()
+}
+----
+
+=== always close on disconnect
+
+.neccessary especially on form errors (leads to disconnect + new connect)
+[source,javascript]
+----
+  disconnect() {
+    this.close()
+  }
+----
+
+=== catch turbo-submit:end event
+
+.close modal if form submit was successful
+[source,javascript]
+----
+  handleSubmit = (event) => {
+    if (event.detail.success) {
+      this.close()
+    }
+  }
+----
+<1>
+
+=== The complete controller
+
+[source,javascript]
+----
+include::example$app/javascript/controllers/modal_controller.js[]
+----

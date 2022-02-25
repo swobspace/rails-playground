@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>A stimulus sortable controller :: Rails Playbook</title>
+    <title>A stimulus controller for Bootstrap v5 Modal :: Rails Playbook</title>
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -51,21 +51,21 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../modal/index.html">Modal</a>
+    <a class="nav-link" href="index.html">Modal</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../modal/modal-js.html">Javascript</a>
+    <a class="nav-link" href="modal-js.html">Javascript</a>
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Sortable</a>
+    <a class="nav-link" href="../sortable/index.html">Sortable</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="sortable-js.html">Javascript</a>
+    <a class="nav-link" href="../sortable/sortable-js.html">Javascript</a>
   </li>
 </ul>
   </li>
@@ -103,7 +103,7 @@
   <ul>
     <li><a href="../index.html">Rails Playbook</a></li>
     <li>Stimulus Controllers</li>
-    <li><a href="index.html">Sortable</a></li>
+    <li><a href="index.html">Modal</a></li>
   </ul>
 </nav>
 </div>
@@ -112,7 +112,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">A stimulus sortable controller</h1>
+<h1 class="page">A stimulus controller for Bootstrap v5 Modal</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="ulist">
@@ -121,7 +121,7 @@
 <p>Source Repository: <a href="https://github.com/swobspace/rails-playground" class="bare">https://github.com/swobspace/rails-playground</a></p>
 </li>
 <li>
-<p>Draggable/Sortable home page: <a href="https://shopify.github.io/draggable/" class="bare">https://shopify.github.io/draggable/</a></p>
+<p>Bootstrap v5 Modal: <a href="https://getbootstrap.com/docs/5.1/components/modal/" class="bare">https://getbootstrap.com/docs/5.1/components/modal/</a></p>
 </li>
 <li>
 <p>Rails Playground: used in lists</p>
@@ -129,7 +129,7 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>The goal: make a list of tasks sortable. <code>@shopify/draggable</code> takes the client part, turbostream re-renders the list after the update. The positioning in active record uses <code>acts_as_list</code>.</p>
+<p>The goal: get bootstrap modal working with turbo_stream</p>
 </div>
 </div>
 </div>
@@ -169,72 +169,100 @@ end</code></pre>
 <p>The following snippets shows only the relevant parts. For the full views please have a look as <code>rails-playground/app/views/lists</code> and <code>rails-playground/app/views/tasks</code>.</p>
 </div>
 <div class="sect2">
-<h3 id="_listsshow_html_erb"><a class="anchor" href="#_listsshow_html_erb"></a>lists/show.html.erb</h3>
+<h3 id="_tasksnew_html_erb"><a class="anchor" href="#_tasksnew_html_erb"></a>tasks/new.html.erb</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;div id="ts_taskable_tasks"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;%= render partial: 'lists/show', locals: { list: @list }%&gt;
-&lt;/div&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;%= render ModalComponent.new(title: 'Edit Task') do %&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;%= render "form", task: @task %&gt;
+&lt;% end %&gt;</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>a unique id use with <code>turbo_stream.update</code> in <code>app/views/tasks/update.turbo_stream.erb</code></td>
+<td>Use a Component for reuse the repeating modal frame stuff</td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_lists_show_html_erb"><a class="anchor" href="#_lists_show_html_erb"></a>lists/_show.html.erb</h3>
+<h3 id="_appcomponentsmodal_component_html_erb"><a class="anchor" href="#_appcomponentsmodal_component_html_erb"></a>app/components/modal_component.html.erb</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;div data-controller="sortable"  <i class="conum" data-value="1"></i><b>(1)</b>
-     data-sortable-handle-value=".handle" <i class="conum" data-value="2"></i><b>(2)</b>
-     class="list-group mb-3"&gt;
-  &lt;%= render partial: 'tasks/task', collection: list.tasks, as: :task %&gt;
-&lt;/div&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;%= turbo_frame_tag "modal" do %&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;div class="modal" tabindex="-1"
+       id="modalComponent" <i class="conum" data-value="2"></i><b>(2)</b>
+       data-controller="modal" <i class="conum" data-value="3"></i><b>(3)</b>
+       data-action="turbo:submit-end-&gt;modal#handleSubmit" <i class="conum" data-value="4"></i><b>(4)</b>
+  &gt;
+    &lt;div class="modal-dialog"&gt;
+      &lt;div class="modal-content"&gt;
+        &lt;div class="modal-header"&gt;
+          &lt;h5 class="modal-title"&gt;&lt;%= @title %&gt;&lt;/h5&gt; <i class="conum" data-value="5"></i><b>(5)</b>
+          &lt;button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="modal-body"&gt;
+          &lt;%= content %&gt; <i class="conum" data-value="6"></i><b>(6)</b>
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>initialize the sortable controller</td>
+<td>use a turbo_frame tag</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>optional: set handle to restrict draggable to some parts of your item.</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_tasks_task_html_erb"><a class="anchor" href="#_tasks_task_html_erb"></a>tasks/_task.html.erb</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;div id="&lt;%= dom_id task %&gt;"  <i class="conum" data-value="1"></i><b>(1)</b>
-     class="list-group-item"
-     data-sortable-target="item" <i class="conum" data-value="2"></i><b>(2)</b>
-     data-url="&lt;%= polymorphic_path([task.list, task])%&gt;" <i class="conum" data-value="3"></i><b>(3)</b>
-&gt;
-...</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>id must be dom_id(task)</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>stimulus target is <code>item</code>.</td>
+<td>don&#8217;t forget a unique id for this modal</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>path for update via PUT</td>
+<td>initialize modal controller</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>handle successful form response &#8594; close modal via <code>modal#handleSubmit</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>title to be set in <code>ModalComponent.new(title: &#8230;&#8203;)</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>here goes the block (<code>content</code> instead of ruby&#8217;s <code>yield</code> in ViewComponent)</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_appcomponentmodal_component_rb"><a class="anchor" href="#_appcomponentmodal_component_rb"></a>app/component/modal_component.rb</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class ModalComponent &lt; ViewComponent::Base
+  include Turbo::FramesHelper <i class="conum" data-value="1"></i><b>(1)</b>
+
+  def initialize(title:)
+    @title = title <i class="conum" data-value="2"></i><b>(2)</b>
+  end
+
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>use <code>turbo_frame_tag</code> helpers without helpers prefix</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>title to be set</td>
 </tr>
 </table>
 </div>

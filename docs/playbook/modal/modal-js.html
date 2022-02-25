@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Stimulus Controller for Bootstrap Modal :: Rails Playbook</title>
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Rails Playbook</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Rails Playbook</div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="playbook" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Rails Playbook</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Stimulus Controllers</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../datatables/index.html">Datatables</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../datatables/datatables-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Modal</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="modal-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../sortable/index.html">Sortable</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../sortable/sortable-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Rails Playbook</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Rails Playbook</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Rails Playbook</a></li>
+    <li>Stimulus Controllers</li>
+    <li><a href="index.html">Modal</a></li>
+    <li><a href="modal-js.html">Javascript</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Stimulus Controller for Bootstrap Modal</h1>
+<div class="sect1">
+<h2 id="_stimulus_controller"><a class="anchor" href="#_stimulus_controller"></a>Stimulus controller</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">connect() {
+  this.modal = new bootstrap.Modal(this.element)
+  this.modal.show() <i class="conum" data-value="1"></i><b>(1)</b>
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Auto-open modal on connect</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_close_function"><a class="anchor" href="#_close_function"></a>#close function</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">close() {
+  this.modal.hide()
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_always_close_on_disconnect"><a class="anchor" href="#_always_close_on_disconnect"></a>always close on disconnect</h3>
+<div class="listingblock">
+<div class="title">neccessary especially on form errors (leads to disconnect + new connect)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">  disconnect() {
+    this.close()
+  }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_catch_turbo_submitend_event"><a class="anchor" href="#_catch_turbo_submitend_event"></a>catch turbo-submit:end event</h3>
+<div class="listingblock">
+<div class="title">close modal if form submit was successful</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">  handleSubmit = (event) =&gt; {
+    if (event.detail.success) {
+      this.close()
+    }
+  }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&lt;1&gt;</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_complete_controller"><a class="anchor" href="#_the_complete_controller"></a>The complete controller</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import { Controller } from "@hotwired/stimulus"
+
+// Connects to data-controller="modal"
+export default class extends Controller {
+  // auto-open modal on connect
+  connect() {
+    // console.log("modal#connect")
+    this.modal = new bootstrap.Modal(this.element)
+    this.modal.show()
+  }
+
+  disconnect() {
+    // console.log("modal#disconnect")
+    this.close()
+  }
+
+  close() {
+    // console.log("modal#close")
+    // close modal element
+    this.modal.hide()
+  }
+
+  /* close the modal form only if submission is successful
+     catch turbo:submit-end via action 
+     (don't include the controller here, modal controller is always
+      included via sharedModal)
+
+     &lt;%= form_for(@mymodel,
+         data: { action: "turbo:submit-end-&gt;modal#handleSubmit" }) do |f| %&gt;
+   */
+
+  handleSubmit = (event) =&gt; {
+    // console.log("modal#handleSubmit")
+    // close modal if form submission is successful
+    if (event.detail.success) {
+      this.close()
+    }
+  }
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2021</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>
