@@ -1,5 +1,5 @@
 <div data-controller="sortable" 
-     data-sortable-url-value="<%= list_tasks_path(list) %>"
+     data-sortable-handle-value=".handle"
      class="list-group mb-3">
   <%= render partial: 'tasks/task', collection: list.tasks, as: :task %>
 </div>

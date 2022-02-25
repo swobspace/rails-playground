@@ -4,7 +4,7 @@ import { Sortable } from '@shopify/draggable';
 export default class extends Controller {
   static targets = ['item']
   static values = {
-    url: String
+    handle: String
   }
 
   connect() {
@@ -17,7 +17,8 @@ export default class extends Controller {
 
       const sortable = new Sortable(this.element, {
         draggable: '.draggable-source',
-        distance: 5,
+        handle: this.handleValue,
+        distance: 15,
         mirror: {
           constrainDimensions: true
         }
@@ -27,11 +28,15 @@ export default class extends Controller {
         item.setAttribute('style', 'z-index: 1000; background-color: #FFFFAB;')
       })
       sortable.on('sortable:stop', function(event) {
+        // avoid update if no changes detected
+        if (event.oldIndex == event.newIndex) {
+          return
+        }
         let item = event.dragEvent.source
         // needs something like id="<%= dom_id item %>"
         let item_id = item.id.substr(item.id.lastIndexOf("_")+1)
         let item_type = item.id.substr(0, item.id.lastIndexOf("_"))
-        let url = `${_this.urlValue}/${item_id}`
+        let url = item.getAttribute('data-url')
         let data = {[item_type]: { position: (event.data.newIndex + 1) }}
         let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
         fetch(url, {

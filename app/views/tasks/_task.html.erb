@@ -1,6 +1,9 @@
-<div id="<%= dom_id task %>" class="list-group-item" data-sortable-target="item">
+<div id="<%= dom_id task %>" class="list-group-item"
+     data-sortable-target="item"
+     data-url="<%= polymorphic_path([task.list, task])%>"
+>
   <div class="row">
-    <div class="col">#<%= task.id %>: <%= task.subject %></div>
+    <div class="col handle">#<%= task.id %>: <%= task.subject %></div>
     <div class="col-sm-3 text-muted text-end">
       <%=task.position %> | 
       <%= task.list %> |
