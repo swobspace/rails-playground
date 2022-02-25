@@ -7,7 +7,9 @@
     <div class="d-flex justify-content-between">
       <h4 class="card-title"> Tasks </h4>
         <%= link_to "Add Task", new_list_task_path(@list), 
-                                class: 'btn btn-outline-secondary mb-2' %>
+                                class: 'btn btn-outline-secondary mb-2',
+                                data: {turbo_frame: 'modal'}
+         %>
     </div>
 
     <div id="ts_taskable_tasks">

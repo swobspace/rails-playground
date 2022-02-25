@@ -1,24 +1,17 @@
-<div class="container">
-  <div class="card">
-    <div class="card-body">
-      <%= simple_form_for([@taskable, @task]) do |form| %>
-      <%= form.error_notification %>
-      <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
+<%= simple_form_for([@taskable, @task]) do |form| %>
+<%= form.error_notification %>
+<%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 
-        <div class="form-input">
-          <%= form.input :subject
-             %>
-          <%= form.input :position
-             %>
-          <%= form.association :list, disabled: @task.list.present?
-             %>
-        </div>
-
-        <div class="form-actions">
-          <%= form.button :submit, class: 'btn btn-primary' %>
-          <%= back_link %>
-        </div>
-      <% end %>
-    </div>
+  <div class="form-input">
+    <%= form.input :subject
+       %>
+    <%= form.input :position
+       %>
+    <%= form.association :list, disabled: @task.list.present?
+       %>
   </div>
-</div>
+
+  <div class="form-actions">
+    <%= form.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>
