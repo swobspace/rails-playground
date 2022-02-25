@@ -24,16 +24,18 @@ if (this.hasItemTarget) { <!--1-->
 ----
 const sortable = new Sortable(this.element, { <!--1-->
   draggable: '.draggable-source', <!--2-->
-  distance: 5, <!--3-->
+  handle: this.handleValue, <!--3-->
+  distance: 5, <!--4-->
   mirror: {
-    constrainDimensions: true <!--4-->
+    constrainDimensions: true <!--5-->
   }
 })
 ----
 <1> `this.element`: the <div> element with data-controller="sortable"
 <2> which elements should be draggable. Here: our bootstrap v5 list group inner item
-<3> how much pixel the item should be moved before draggable takes action
-<4> don't change the size of our draggable element during the move
+<3> optional: set a handle for draggable, may be null
+<4> how much pixel the item should be moved before draggable takes action
+<5> don't change the size of our draggable element during the move
 
 
 === Event sortable:start
@@ -55,7 +57,7 @@ sortable.on('sortable:stop', function(event) {
   let item = event.dragEvent.source <!--1-->
   let item_id = item.id.substr(item.id.lastIndexOf("_")+1) <!--2-->
   let item_type = item.id.substr(0, item.id.lastIndexOf("_")) <!--3-->
-  let url = `${_this.urlValue}/${item_id}`<!--4-->
+  let url = item.getAttribute('data-url') <!--4-->
   let data = {[item_type]: { position: (event.data.newIndex + 1) }} <!--5-->
   let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content') <!--6-->
   fetch(url, {
@@ -75,7 +77,7 @@ sortable.on('sortable:stop', function(event) {
 <1> the dragged item itself
 <2> extract the numeric id from dom_id(item), i.e. task_123 -> '123'
 <3> item type, i.e. task_123 -> 'task'
-<4> build the item specific url. The url value is set in the same element with `data-controller="sortable"`
+<4> url for update via PUT
 <5> build the parameter hash: with the standard controller update method we need something like {"task": { "position": <new position>}}
 <6> to overcome CSRF protection, fetch the token from the header and use it in the PUT/PATCH request.
 <7> we are sending JSON data ...

@@ -141,9 +141,10 @@
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const sortable = new Sortable(this.element, { <i class="conum" data-value="1"></i><b>(1)</b>
   draggable: '.draggable-source', <i class="conum" data-value="2"></i><b>(2)</b>
-  distance: 5, <i class="conum" data-value="3"></i><b>(3)</b>
+  handle: this.handleValue, <i class="conum" data-value="3"></i><b>(3)</b>
+  distance: 5, <i class="conum" data-value="4"></i><b>(4)</b>
   mirror: {
-    constrainDimensions: true <i class="conum" data-value="4"></i><b>(4)</b>
+    constrainDimensions: true <i class="conum" data-value="5"></i><b>(5)</b>
   }
 })</code></pre>
 </div>
@@ -160,10 +161,14 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>how much pixel the item should be moved before draggable takes action</td>
+<td>optional: set a handle for draggable, may be null</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>how much pixel the item should be moved before draggable takes action</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>don&#8217;t change the size of our draggable element during the move</td>
 </tr>
 </table>
@@ -196,7 +201,7 @@
   let item = event.dragEvent.source <i class="conum" data-value="1"></i><b>(1)</b>
   let item_id = item.id.substr(item.id.lastIndexOf("_")+1) <i class="conum" data-value="2"></i><b>(2)</b>
   let item_type = item.id.substr(0, item.id.lastIndexOf("_")) <i class="conum" data-value="3"></i><b>(3)</b>
-  let url = `${_this.urlValue}/${item_id}`<i class="conum" data-value="4"></i><b>(4)</b>
+  let url = item.getAttribute('data-url') <i class="conum" data-value="4"></i><b>(4)</b>
   let data = {[item_type]: { position: (event.data.newIndex + 1) }} <i class="conum" data-value="5"></i><b>(5)</b>
   let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content') <i class="conum" data-value="6"></i><b>(6)</b>
   fetch(url, {
@@ -230,7 +235,7 @@
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>build the item specific url. The url value is set in the same element with <code>data-controller="sortable"</code></td>
+<td>url for update via PUT</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
@@ -277,7 +282,7 @@ import { Sortable } from '@shopify/draggable';
 export default class extends Controller {
   static targets = ['item']
   static values = {
-    url: String
+    handle: String
   }
 
   connect() {
@@ -290,7 +295,8 @@ export default class extends Controller {
 
       const sortable = new Sortable(this.element, {
         draggable: '.draggable-source',
-        distance: 5,
+        handle: this.handleValue,
+        distance: 15,
         mirror: {
           constrainDimensions: true
         }
@@ -300,11 +306,15 @@ export default class extends Controller {
         item.setAttribute('style', 'z-index: 1000; background-color: #FFFFAB;')
       })
       sortable.on('sortable:stop', function(event) {
+        // avoid update if no changes detected
+        if (event.oldIndex == event.newIndex) {
+          return
+        }
         let item = event.dragEvent.source
         // needs something like id="&lt;%= dom_id item %&gt;"
         let item_id = item.id.substr(item.id.lastIndexOf("_")+1)
         let item_type = item.id.substr(0, item.id.lastIndexOf("_"))
-        let url = `${_this.urlValue}/${item_id}`
+        let url = item.getAttribute('data-url')
         let data = {[item_type]: { position: (event.data.newIndex + 1) }}
         let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
         fetch(url, {

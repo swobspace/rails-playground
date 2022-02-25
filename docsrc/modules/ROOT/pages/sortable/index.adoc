@@ -40,21 +40,24 @@ The following snippets shows only the relevant parts. For the full views please 
 [source,erb]
 ----
 <div data-controller="sortable"  <!--1-->
-     data-sortable-url-value="<%= list_tasks_path(list) %>" <!--2-->
+     data-sortable-handle-value=".handle" <!--2-->
      class="list-group mb-3">
   <%= render partial: 'tasks/task', collection: list.tasks, as: :task %>
 </div>
 ----
 <1> initialize the sortable controller
-<2> Generic path, used later with the task id, i.e. lists/1/tasks/2 for the `:update` action
+<2> optional: set handle to restrict draggable to some parts of your item.
 
 === tasks/_task.html.erb
 [source,erb]
 ----
 <div id="<%= dom_id task %>"  <!--1-->
      class="list-group-item"
-     data-sortable-target="item"> <!--2-->
+     data-sortable-target="item" <!--2-->
+     data-url="<%= polymorphic_path([task.list, task])%>" <!--3-->
+>
 ...
 ----
 <1> id must be dom_id(task)
 <2> stimulus target is `item`.
+<3> path for update via PUT

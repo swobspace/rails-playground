@@ -182,7 +182,7 @@ end</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;div data-controller="sortable"  <i class="conum" data-value="1"></i><b>(1)</b>
-     data-sortable-url-value="&lt;%= list_tasks_path(list) %&gt;" <i class="conum" data-value="2"></i><b>(2)</b>
+     data-sortable-handle-value=".handle" <i class="conum" data-value="2"></i><b>(2)</b>
      class="list-group mb-3"&gt;
   &lt;%= render partial: 'tasks/task', collection: list.tasks, as: :task %&gt;
 &lt;/div&gt;</code></pre>
@@ -196,7 +196,7 @@ end</code></pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Generic path, used later with the task id, i.e. lists/1/tasks/2 for the <code>:update</code> action</td>
+<td>optional: set handle to restrict draggable to some parts of your item.</td>
 </tr>
 </table>
 </div>
@@ -207,7 +207,9 @@ end</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;div id="&lt;%= dom_id task %&gt;"  <i class="conum" data-value="1"></i><b>(1)</b>
      class="list-group-item"
-     data-sortable-target="item"&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+     data-sortable-target="item" <i class="conum" data-value="2"></i><b>(2)</b>
+     data-url="&lt;%= polymorphic_path([task.list, task])%&gt;" <i class="conum" data-value="3"></i><b>(3)</b>
+&gt;
 ...</code></pre>
 </div>
 </div>
@@ -220,6 +222,10 @@ end</code></pre>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
 <td>stimulus target is <code>item</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>path for update via PUT</td>
 </tr>
 </table>
 </div>
