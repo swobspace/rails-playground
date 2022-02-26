@@ -1,0 +1,82 @@
+= Flash messages with turbo-streams
+:navtitle: Flash
+:imagesdir: ../../images
+
+* Source Repository: {github}
+* Bootstrap v5 Alert: https://getbootstrap.com/docs/5.1/components/alerts
+* Rails Playground: used in lists on add/remove tasks
+
+The goal: show flash messages from turbo_stream rendering with animation, fadeout and remove it after the animation has finished
+
+
+
+== Layout
+
+Very simple: just a `<div>` with an `id` where to show flash messages from turbo_stream rendering. Otherwise render existing flashes as usual. In case of turbo_stream rendering the content of the `<div>` will be replaced by turbo_stream content.
+
+./app/views/layout/application.html.erb
+[source,erb]
+----
+<div class="container-fluid">
+  <div id="flash"> <!--1-->
+    <%= render "shared/flash" %>
+  </div>
+  <%= yield %>
+</div>
+----
+<1> id for turbo_stream replacing
+
+== A Helper to render_turbo_flash
+
+A helper to call from each `create|update|destroy.turbo_stream.erb` view: simply add the following snippet to each view:
+
+.create|update|destroy.turbo_stream.erb
+[source,erb]
+----
+<%= render_turbo_flash %>
+----
+
+See also: https://github.com/swobspace/rails-playground/tree/main/app/views/tasks
+
+=== The helper itself
+
+.app/helpers/flash_helper.rb
+[source,ruby]
+----
+include::example$app/helpers/flash_helper.rb[]
+----
+
+=== A partial to go through each flash key
+
+.partial app/views/shared/_flash.html.erb
+[source,erb]
+----
+include::example$app/views/shared/_flash.html.erb[]
+----
+
+== A view component for alerts
+
+Since flashes goes with keys like :alert, :error, :notice, we need those translated in bootstrap jargon like 'danger', 'info' or 'success'.
+
+./app/components/alert_component.rb
+[source,ruby]
+----
+include::example$app/components/alert_component.rb[]
+----
+
+./app/components/alert_component.html.erb
+
+[source,erb]
+----
+include::example$app/components/alert_component.html.erb[]
+----
+
+== CSS for animating flash messages
+
+.app/assets/stylesheets/flash-animation.scss
+[source,css]
+----
+include::example$app/assets/stylesheets/flash-animation.scss[]
+----
+
+TIP: More information on css animations can be found on https://developer.mozilla.org/de/docs/Web/CSS/animation

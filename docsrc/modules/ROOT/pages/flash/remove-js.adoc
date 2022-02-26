@@ -1,0 +1,21 @@
+= Stimulus Controller to close the alert
+:navtitle: Javascript
+:imagesdir: ../../images
+
+=== The complete controller
+
+It's very simple: call the action `remove()` after the animation event is completed via `data-action`:
+
+
+[source,html]
+----
+<div ... data-action="animationend->remove#remove">
+----
+
+.app/javascript/controllers/remove_controller.js
+[source,javascript]
+----
+include::example$app/javascript/controllers/remove_controller.js[]
+----
+
+Yes, it's that simple &#x1F642;
