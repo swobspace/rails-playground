@@ -144,25 +144,17 @@
 </div>
 </div>
 <div class="sect2">
-<h3 id="_always_close_on_disconnect"><a class="anchor" href="#_always_close_on_disconnect"></a>always close on disconnect</h3>
-<div class="listingblock">
-<div class="title">neccessary especially on form errors (leads to disconnect + new connect)</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">  disconnect() {
-    this.close()
-  }</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
 <h3 id="_catch_turbo_submitend_event"><a class="anchor" href="#_catch_turbo_submitend_event"></a>catch turbo-submit:end event</h3>
 <div class="listingblock">
-<div class="title">close modal if form submit was successful</div>
+<div class="title">close modal after form submit</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">  handleSubmit = (event) =&gt; {
     if (event.detail.success) {
-      this.close()
+      console.log("modal#handleSubmit successful")
+      // may be do some other stuff here ....;
     }
+    // always close modal after form submit
+    this.close()
   }</code></pre>
 </div>
 </div>
@@ -176,41 +168,32 @@
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="modal"
 export default class extends Controller {
+
   // auto-open modal on connect
   connect() {
-    // console.log("modal#connect")
+    console.log("modal#connect")
     this.modal = new bootstrap.Modal(this.element)
     this.modal.show()
   }
 
   disconnect() {
-    // console.log("modal#disconnect")
-    this.close()
+    console.log("modal#disconnect")
   }
 
   close() {
-    // console.log("modal#close")
-    // close modal element
+    console.log("modal#close")
     this.modal.hide()
   }
 
-  /* close the modal form only if submission is successful
-     catch turbo:submit-end via action 
-     (don't include the controller here, modal controller is always
-      included via sharedModal)
-
-     &lt;%= form_for(@mymodel,
-         data: { action: "turbo:submit-end-&gt;modal#handleSubmit" }) do |f| %&gt;
-   */
-
+  // catch turbo:submit-end via action 
   handleSubmit = (event) =&gt; {
-    // console.log("modal#handleSubmit")
+    console.log("modal#handleSubmit")
     // close modal if form submission is successful
     if (event.detail.success) {
-      this.close()
+      console.log("modal#handleSubmit event successful")
     }
+    this.close()
   }
 
 }</code></pre>

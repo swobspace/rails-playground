@@ -1,0 +1,29 @@
+@startuml
+
+:click new link;
+
+#lightblue:render :new form;
+
+(A)
+#pink:connect()
+ opens modal form;
+
+:form submit;
+
+#lightblue:controller triggers
+event turbo:submit-end;
+
+if (successful?) then (yes)
+  #pink:handleSubmit()
+  close modal;
+  stop
+else (no)
+  #pink:handleSubmit()
+  close modal;
+  #lightblue:rerender :new form;
+  #pink:disconnect();
+  #pink:connect()
+   opens modal form;
+   (A)
+   detach
+@enduml

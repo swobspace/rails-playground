@@ -134,6 +134,32 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="_activity_diagram"><a class="anchor" href="#_activity_diagram"></a>Activity Diagram</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/modal/state-diagram.svg" alt="state diagram">
+</div>
+<div class="title">Figure 1. activity diagram for modal forms, stimulus and @hotwire/turbo</div>
+</div>
+<div class="paragraph">
+<p>User actions are colored in yellow, rails controller action colored in blue and stimulus calls are colored in pink.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+After a form submit there is no <code>disconnect()</code> from the stimulus controller. In case of errors rails renders <code>:new</code>, and this leads to a <code>disconnect()</code> before <code>reconnect()</code> since turbo-stream rewrites the content of the modal turbo_frame_tag. In case of success we use the event <code>turbo:submit-end</code> to close the modal. In case of errors you can use <code>disconnect()</code> too.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_models"><a class="anchor" href="#_models"></a>Models</h2>
 <div class="sectionbody">
 <div class="listingblock">
@@ -166,24 +192,32 @@ end</code></pre>
 <h2 id="_views"><a class="anchor" href="#_views"></a>Views</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following snippets shows only the relevant parts. For the full views please have a look as <code>rails-playground/app/views/lists</code> and <code>rails-playground/app/views/tasks</code>.</p>
+<p>The following snippets shows only the relevant parts. For the full views please have a look as <code>rails-playground/app/components/modal_component.*</code> and <code>rails-playground/app/views/tasks</code>.</p>
 </div>
 <div class="sect2">
-<h3 id="_tasksnew_html_erb"><a class="anchor" href="#_tasksnew_html_erb"></a>tasks/new.html.erb</h3>
+<h3 id="_layout_a_generic_turbo_frame_tag"><a class="anchor" href="#_layout_a_generic_turbo_frame_tag"></a>Layout: a generic turbo_frame_tag</h3>
 <div class="listingblock">
+<div class="title">/app/views/layouts/application.html.erb</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;%= render ModalComponent.new(title: 'Edit Task') do %&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;body&gt;
+  &lt;%= turbo_frame_tag "modal" %&gt;
+...
+&lt;/body&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_new_and_edit_views"><a class="anchor" href="#_new_and_edit_views"></a>New and edit views</h3>
+<div class="paragraph">
+<p>We use a <code>ViewComponent</code> to dry the endless repeating modal html stuff in each <code>#new</code> or <code>#edit</code> view.</p>
+</div>
+<div class="listingblock">
+<div class="title">app/views/tasks/new.html.erb; same goes to edit.html.erb</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;%= render ModalComponent.new(title: 'Edit Task') do %&gt;
   &lt;%= render "form", task: @task %&gt;
 &lt;% end %&gt;</code></pre>
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Use a Component for reuse the repeating modal frame stuff</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect2">
@@ -215,7 +249,7 @@ end</code></pre>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>use a turbo_frame tag</td>
+<td>include the turbo_frame tag <code>modal</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>

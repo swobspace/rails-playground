@@ -9,6 +9,15 @@
 The goal: get bootstrap modal working with turbo_stream
 
 
+== Activity Diagram
+
+.activity diagram for modal forms, stimulus and @hotwire/turbo
+image::modal/state-diagram.svg[]
+
+User actions are colored in yellow, rails controller action colored in blue and stimulus calls are colored in pink.
+
+NOTE: After a form submit there is no `disconnect()` from the stimulus controller. In case of errors rails renders `:new`, and this leads to a `disconnect()` before `reconnect()` since turbo-stream rewrites the content of the modal turbo_frame_tag. In case of success we use the event `turbo:submit-end` to close the modal. In case of errors you can use `disconnect()` too.
+
 == Models
 
 [source,ruby]
@@ -23,17 +32,30 @@ include::example$app/models/task.rb[]
 
 == Views
 
-The following snippets shows only the relevant parts. For the full views please have a look as `rails-playground/app/views/lists` and `rails-playground/app/views/tasks`.
+The following snippets shows only the relevant parts. For the full views please have a look as `rails-playground/app/components/modal_component.*` and `rails-playground/app/views/tasks`.
 
-=== tasks/new.html.erb
+=== Layout: a generic turbo_frame_tag
 
+./app/views/layouts/application.html.erb
 [source,erb]
 ----
-<%= render ModalComponent.new(title: 'Edit Task') do %> <!--1-->
+<body>
+  <%= turbo_frame_tag "modal" %>
+...
+</body>
+----
+
+=== New and edit views
+
+We use a `ViewComponent` to dry the endless repeating modal html stuff in each `#new` or `#edit` view.
+
+.app/views/tasks/new.html.erb; same goes to edit.html.erb
+[source,erb]
+----
+<%= render ModalComponent.new(title: 'Edit Task') do %>
   <%= render "form", task: @task %>
 <% end %>
 ----
-<1> Use a Component for reuse the repeating modal frame stuff
 
 === app/components/modal_component.html.erb
 
@@ -59,7 +81,7 @@ The following snippets shows only the relevant parts. For the full views please 
   </div>
 <% end %>
 ----
-<1> use a turbo_frame tag
+<1> include the turbo_frame tag `modal`
 <2> don't forget a unique id for this modal
 <3> initialize modal controller
 <4> handle successful form response -> close modal via `modal#handleSubmit`

@@ -22,25 +22,18 @@ close() {
 }
 ----
 
-=== always close on disconnect
-
-.neccessary especially on form errors (leads to disconnect + new connect)
-[source,javascript]
-----
-  disconnect() {
-    this.close()
-  }
-----
-
 === catch turbo-submit:end event
 
-.close modal if form submit was successful
+.close modal after form submit
 [source,javascript]
 ----
   handleSubmit = (event) => {
     if (event.detail.success) {
-      this.close()
+      console.log("modal#handleSubmit successful")
+      // may be do some other stuff here ....;
     }
+    // always close modal after form submit
+    this.close()
   }
 ----
 <1>
