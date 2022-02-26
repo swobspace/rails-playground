@@ -1,0 +1,8 @@
+// -- animation: fadeout for flash messages
+.fadeout {
+  animation: 4s fadeout;
+}
+@keyframes fadeout {
+  0%, 100% { opacity: 0; }
+  10%, 50% { opacity: 1; }
+}

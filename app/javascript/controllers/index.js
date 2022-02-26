@@ -13,5 +13,8 @@ application.register("hello", HelloController)
 import ModalController from "./modal_controller.js"
 application.register("modal", ModalController)
 
+import RemoveController from "./remove_controller.js"
+application.register("remove", RemoveController)
+
 import SortableController from "./sortable_controller.js"
 application.register("sortable", SortableController)

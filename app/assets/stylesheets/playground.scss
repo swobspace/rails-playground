@@ -1,6 +1,7 @@
 // set primary color before importing bootstrap
 $primary: #137970;
 @import 'bootstrap/scss/bootstrap';
+@import 'flash-animation';
 
 // -- add some space after bootstrap navbar
 body {
@@ -37,13 +38,4 @@ body {
 
 form.button_to {
   display: inline-block;
-}
-
-// -- animation: fadeout for flash messages
-.fadeinout {
-  animation: fadeInOut 5s linear;
-}
-@keyframes fadeInOut {
-  0%, 100% { opacity: 0; }
-  5%, 70% { opacity: 1; }
 }
