@@ -136,6 +136,49 @@
 </div>
 </div>
 <div class="sect1">
+<h2 id="_rails_controller_set_the_flash_message"><a class="anchor" href="#_rails_controller_set_the_flash_message"></a>Rails controller: set the flash message</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">/app/controllers/tasks_controller.rb</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">def create
+  @task = @list.tasks.build(task_params)
+
+  respond_with(@task, location: location) do |format|
+    if @task.save
+      format.turbo_stream { flash.now[:notice] = "Task successfully created" }
+    end
+  end
+end</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We use <code>flash.now</code> here since there is no redirect with turbo_stream.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>respond_with</code> since we uses the <code>responders</code> gem from <a href="https://github.com/heartcombo/responders" class="bare">https://github.com/heartcombo/responders</a>. Your mileage may vary. Plain rails 7 generators don&#8217;t use <code>respond_to</code> (nor <code>respond_with</code>). See <code>app/controllers/categories_controller.rb</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_layout"><a class="anchor" href="#_layout"></a>Layout</h2>
 <div class="sectionbody">
 <div class="paragraph">

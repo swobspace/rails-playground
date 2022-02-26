@@ -8,7 +8,24 @@
 
 The goal: show flash messages from turbo_stream rendering with animation, fadeout and remove it after the animation has finished
 
+== Rails controller: set the flash message
 
+./app/controllers/tasks_controller.rb
+[source,ruby]
+----
+def create
+  @task = @list.tasks.build(task_params)
+
+  respond_with(@task, location: location) do |format|
+    if @task.save
+      format.turbo_stream { flash.now[:notice] = "Task successfully created" }
+    end
+  end
+end
+----
+NOTE: We use `flash.now` here since there is no redirect with turbo_stream.
+
+NOTE: `respond_with` since we uses the `responders` gem from https://github.com/heartcombo/responders. Your mileage may vary. Plain rails 7 generators don't use `respond_to` (nor `respond_with`). See `app/controllers/categories_controller.rb`.
 
 == Layout
 

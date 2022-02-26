@@ -1,4 +1,4 @@
-<%= simple_form_for([@taskable, @task]) do |form| %>
+<%= simple_form_for([@list, @task]) do |form| %>
 <%= form.error_notification %>
 <%= form.error_notification message: form.object.errors[:base].to_sentence if form.object.errors[:base].present? %>
 

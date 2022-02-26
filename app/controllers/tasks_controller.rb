@@ -14,8 +14,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    if @taskable.present?
-      @task = @taskable.tasks.build
+    if @list.present?
+      @task = @list.tasks.build
     else
       @task = Task.new
     end
@@ -28,8 +28,8 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
-    if @taskable.present?
-      @task = @taskable.tasks.build(task_params)
+    if @list.present?
+      @task = @list.tasks.build(task_params)
     else
       @task = Task.new(task_params)
     end
@@ -72,9 +72,9 @@ class TasksController < ApplicationController
 
     def location
       if action_name == 'destroy'
-        polymorphic_path(@taskable || :tasks)
+        polymorphic_path(@list || :tasks)
       else
-        polymorphic_path(@taskable || @task)
+        polymorphic_path(@list || @task)
       end
     end
 

@@ -1,0 +1,5 @@
+<%= turbo_stream.update('list_tasks') do %>
+  <%= render partial: 'lists/show', locals: { list: @list } %>
+<% end %>
+
+<%= render_turbo_flash %>

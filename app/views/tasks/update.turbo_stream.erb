@@ -1,9 +1,0 @@
-<% if @taskable %>
-  <%= turbo_stream.update('ts_taskable_tasks') do %>
-    <%= render partial: 'lists/show', locals: { list: @taskable } %>
-  <% end %>
-<% else %>
-  not yet implemented
-<% end %>
-
-<%= render_turbo_flash %>

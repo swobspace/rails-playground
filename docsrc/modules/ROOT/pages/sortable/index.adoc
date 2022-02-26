@@ -29,7 +29,7 @@ The following snippets shows only the relevant parts. For the full views please 
 
 [source,erb]
 ----
-<div id="ts_taskable_tasks"> <!--1-->
+<div id="list_tasks"> <!--1-->
   <%= render partial: 'lists/show', locals: { list: @list }%>
 </div>
 ----
