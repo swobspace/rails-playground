@@ -1,0 +1,7 @@
+<% flash.each do |level,msg| %>
+  <div class="alert alert-<%= level %> flashinout" role="alert" data-controller="alerts">
+    <%= msg %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+  </div>
+<% end %>

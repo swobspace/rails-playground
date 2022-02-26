@@ -36,7 +36,7 @@ class TasksController < ApplicationController
 
     respond_with(@task, location: location) do |format|
       if @task.save
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Task successfully created" }
       end
     end
   end
@@ -45,7 +45,7 @@ class TasksController < ApplicationController
   def update
    respond_with(@task, location: location) do |format|
       if @task.update(task_params)
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Task successfully updated" }
       end
     end
   end
@@ -54,7 +54,7 @@ class TasksController < ApplicationController
   def destroy
    respond_with(@task, location: location) do |format|
       if @task.destroy
-        format.turbo_stream
+        format.turbo_stream { flash.now[:notice] = "Task successfully deleted" }
       end
     end
   end

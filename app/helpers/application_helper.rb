@@ -29,4 +29,8 @@ module ApplicationHelper
             target: '_top',
             class: 'btn btn-danger me-1')
   end
+
+  def render_turbo_flash
+    turbo_stream.update "flash", partial: "shared/flash"
+  end
 end

@@ -38,3 +38,12 @@ body {
 form.button_to {
   display: inline-block;
 }
+
+// -- animation: fadeout for flash messages
+.fadeinout {
+  animation: fadeInOut 5s linear;
+}
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  5%, 70% { opacity: 1; }
+}
