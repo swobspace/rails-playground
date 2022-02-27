@@ -1,0 +1,18 @@
+= Stimulus Controller to initialize Bootstrap Toast
+:navtitle: Javascript
+:imagesdir: ../../images
+
+Bootstrap Toasts are opt-in, so you must initialize them yourself. See
+https://getbootstrap.com/docs/5.1/components/toasts/#overview
+
+
+=== The complete controller
+
+
+.app/javascript/controllers/toast_controller.js
+[source,javascript]
+----
+include::example$app/javascript/controllers/remove_controller.js[]
+----
+
+TIP: If you want to change the animation, set options in `new bootstrap.Toast`. Default is `animation: true`, `autohide: true`, `delay: 5000`.

@@ -2,6 +2,8 @@
 ** xref:datatables/datatables-js.adoc[]
 * xref:flash/index.adoc[]
 ** xref:flash/remove-js.adoc[]
+* xref:flash/toast.adoc[]
+** xref:flash/toast-js.adoc[]
 * xref:modal/index.adoc[]
 ** xref:modal/modal-js.adoc[]
 * xref:sortable/index.adoc[]

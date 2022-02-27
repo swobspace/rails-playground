@@ -32,7 +32,7 @@ const sortable = new Sortable(this.element, { <!--1-->
 })
 ----
 <1> `this.element`: the <div> element with data-controller="sortable"
-<2> which elements should be draggable. Here: our bootstrap v5 list group inner item
+<2> which elements should be draggable. Here: our Bootstrap v5 list group inner item
 <3> optional: set a handle for draggable, may be null
 <4> how much pixel the item should be moved before draggable takes action
 <5> don't change the size of our draggable element during the move

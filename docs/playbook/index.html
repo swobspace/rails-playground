@@ -49,10 +49,19 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="flash/index.html">Flash</a>
+    <a class="nav-link" href="flash/index.html">Flash/Alert</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="flash/remove-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="flash/toast.html">Flash/Toast</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="flash/toast-js.html">Javascript</a>
   </li>
 </ul>
   </li>
@@ -136,7 +145,7 @@
 <p>cssbundling-rails</p>
 </li>
 <li>
-<p>bootstrap 5.x</p>
+<p>Bootstrap 5.x</p>
 </li>
 <li>
 <p>simple_form</p>
@@ -215,8 +224,12 @@ bin/rake db:seed</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Using a single stimulus controller for 3 different scenarios: html tables with and without buttons and for tables with server side processing (fetching data via ajax)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="flash/index.html" class="xref page">Flash</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Use turbo_stream to show flash messages as bootstrap alert and remove it after some animation.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="flash/index.html" class="xref page">Flash/Alert</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use turbo_stream to show flash messages as Bootstrap Alert and remove it after some animation.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="flash/index.html" class="xref page">Flash/Toast</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use turbo_stream to show flash messages as Bootstrap Toast using default options (<code>animation: true</code>, <code>autohide: true</code>, <code>delay: 5000</code>)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="modal/index.html" class="xref page">Modal</a></p></td>
@@ -224,7 +237,7 @@ bin/rake db:seed</pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="flash/index.html" class="xref page">Sortable</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A sortable list with bootstrap list group and @shopify/draggable.js using turbo_stream for updates after sorting.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A sortable list with Bootstrap list group and @shopify/draggable.js using turbo_stream for updates after sorting.</p></td>
 </tr>
 </tbody>
 </table>

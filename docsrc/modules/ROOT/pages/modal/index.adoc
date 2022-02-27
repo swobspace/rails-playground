@@ -6,7 +6,7 @@
 * Bootstrap v5 Modal: https://getbootstrap.com/docs/5.1/components/modal/
 * Rails Playground: used in lists on add/remove tasks
 
-The goal: get bootstrap modal working with turbo_stream
+The goal: get Bootstrap modal working with turbo_stream
 
 
 == Activity Diagram

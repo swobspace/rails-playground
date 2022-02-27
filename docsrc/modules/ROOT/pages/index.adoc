@@ -7,7 +7,7 @@ The stack for this application::
 * rails 7.0
 * jssbundling-rails with esbuild
 * cssbundling-rails
-* bootstrap 5.x
+* Bootstrap 5.x
 * simple_form
 
 Have fun. If you find a bug or something to improve, open an issue or create a pull request.
@@ -51,14 +51,17 @@ bin/dev
 |xref:datatables/index.adoc[Datatables]
 |Using a single stimulus controller for 3 different scenarios: html tables with and without buttons and for tables with server side processing (fetching data via ajax)
 
-|xref:flash/index.adoc[Flash]
-|Use turbo_stream to show flash messages as bootstrap alert and remove it after some animation.
+|xref:flash/index.adoc[Flash/Alert]
+|Use turbo_stream to show flash messages as Bootstrap Alert and remove it after some animation.
+
+|xref:flash/index.adoc[Flash/Toast]
+|Use turbo_stream to show flash messages as Bootstrap Toast using default options (`animation: true`, `autohide: true`, `delay: 5000`)
 
 |xref:modal/index.adoc[Modal]
 |Get Bootstrap v5 Modal playing nice with turbo_stream.
 
 |xref:flash/index.adoc[Sortable]
-|A sortable list with bootstrap list group and @shopify/draggable.js using turbo_stream for updates after sorting.
+|A sortable list with Bootstrap list group and @shopify/draggable.js using turbo_stream for updates after sorting.
 
 |===
 
