@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { Toast } from "bootstrap/dist/js/bootstrap.esm.js"
+import { Toast } from "bootstrap"
 
 // Connects to data-controller="toast"
 export default class extends Controller {
