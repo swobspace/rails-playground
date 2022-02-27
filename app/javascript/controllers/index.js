@@ -18,3 +18,6 @@ application.register("remove", RemoveController)
 
 import SortableController from "./sortable_controller.js"
 application.register("sortable", SortableController)
+
+import ToastController from "./toast_controller.js"
+application.register("toast", ToastController)
