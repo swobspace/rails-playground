@@ -2,7 +2,7 @@
 :navtitle: Javascript
 :imagesdir: ../../images
 
-=== The complete controller
+== The complete controller
 
 It's very simple: call the action `remove()` after the animation event is completed via `data-action`:
 

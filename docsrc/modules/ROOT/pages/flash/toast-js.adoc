@@ -6,7 +6,7 @@ Bootstrap Toasts are opt-in, so you must initialize them yourself. See
 https://getbootstrap.com/docs/5.1/components/toasts/#overview
 
 
-=== The complete controller
+== The complete controller
 
 
 .app/javascript/controllers/toast_controller.js
