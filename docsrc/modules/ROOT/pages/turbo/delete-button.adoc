@@ -1,0 +1,84 @@
+= Destroy action
+
+There are 2 alternatives to create an action button (or link) for `:destroy`:
+
+* create a mini form with `button_to`, or
+* use link_to with some special data attributes
+
+== button_to
+
+Pros::
+* use POST instead of GET for proper redirection
+* simple to use
+
+Cons::
+* Creates a small form, so don't use it within another form
+* Confirmation `data-turbo-confirm` needs to go to the form, not to the button.
+* Needs a little more CSS styling to be compatible with other bootstrap link
+buttons
+
+
+[source,ruby]
+----
+button_to 'Destroy', @post,
+          method: :delete,
+          form: { 'data-turbo-confirm': 'Are you sure?' }
+----
+
+== link_to
+
+Pros::
+* No separate form
+* mostly compatible with older `rails-ujs` styles
+
+Cons::
+* Beware of the 303 trap (see below)
+
+[source,ruby]
+----
+link_to 'Destroy', @post,
+        'data-turbo-method':
+        'data-turbo-confirm': 'Are you sure?'
+----
+
+=== The 303 trap of @hotwired/turbo
+
+If you are sending a `DELETE` request via `link_to ... method: :delete`, Rails
+redirects with a 302 redirect, but Turbo needs a 303 to use `GET` after `DESTROY`.
+Otherwise Turbo generates a new `DELETE` request. For example:
+
+[cols="m,m,m"]
+|===
+|First Request | Turbo answer  | Result
+
+|DELETE /posts/1
+|DELETE /posts
+|Error
+
+|DELETE /posts/1/comment/1
+|DELETE /posts/1
+|Post(1) gets deleted too
+|===
+NOTE: For more informations, see
+https://github.com/hotwired/turbo/issues/84
+
+
+As long Rails uses 302 instead of 302 here, you have to made a choice:
+
+* set the correct redirect code in each controller (yeah, don't like it too)
+* Catch the response and change it for get requests (see below)
+* use `button_to` instead of `link_to`
+
+.Solve the 302/303 dilemma
+[source,ruby]
+----
+class ApplicationController < ActionController::Base
+  def redirect_to(url_options = {}, response_options = {})
+    response_options[:status] ||= :see_other unless request.get?
+    super url_options, response_options
+  end
+end
+----
+
+See
+https://github.com/heartcombo/responders/issues/227#issuecomment-984367557

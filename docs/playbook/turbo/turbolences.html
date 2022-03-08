@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Turbolences :: Rails Playbook</title>
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../..">Rails Playbook</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="abstand">
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+          <div class="navbar-item dark">Rails Playbook</div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="playbook" data-version="">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Rails Playbook</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../datatables/index.html">Datatables</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../datatables/datatables-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../flash/index.html">Flash/Alert</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../flash/remove-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../flash/toast.html">Flash/Toast</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../flash/toast-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../modal/index.html">Modal</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modal/modal-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../sortable/index.html">Sortable</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../sortable/sortable-js.html">Javascript</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Hotwire/Turbo</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="turbolences.html">Turbolences</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Rails Playbook</span>
+    <span class="version">default</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Rails Playbook</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">default</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Rails Playbook</a></li>
+    <li><a href="index.html">Hotwire/Turbo</a></li>
+    <li><a href="turbolences.html">Turbolences</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Turbolences</h1>
+<div class="sect1">
+<h2 id="_destroy_action"><a class="anchor" href="#_destroy_action"></a>Destroy action</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are 2 alternatives to create an action button (or link) for <code>:destroy</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>create a mini form with <code>button_to</code>, or</p>
+</li>
+<li>
+<p>use link_to with some special data attributes</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_button_to"><a class="anchor" href="#_button_to"></a>button_to</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>use POST instead of GET for proper redirection</p>
+</li>
+<li>
+<p>simple to use</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Cons</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Creates a small form, so don&#8217;t use it within another form</p>
+</li>
+<li>
+<p>Confirmation <code>data-turbo-confirm</code> needs to go to the form, not to the button.</p>
+</li>
+<li>
+<p>Needs a little more CSS styling to be compatible with other bootstrap link
+buttons</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">button_to 'Destroy', @post,
+          method: :delete,
+          form: { 'data-turbo-confirm': 'Are you sure?' }</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_link_to"><a class="anchor" href="#_link_to"></a>link_to</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Pros</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>No separate form</p>
+</li>
+<li>
+<p>mostly compatible with older <code>rails-ujs</code> styles</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">Cons</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Beware of the 303 trap (see below)</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">link_to 'Destroy', @post,
+        'data-turbo-method':
+        'data-turbo-confirm': 'Are you sure?'</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_303_trap_of_hotwiredturbo"><a class="anchor" href="#_the_303_trap_of_hotwiredturbo"></a>The 303 trap of @hotwired/turbo</h3>
+<div class="paragraph">
+<p>If you are sending a <code>DELETE</code> request via <code>link_to &#8230;&#8203; method: :delete</code>, Rails
+redirects with a 302 redirect, but Turbo needs a 303 to use <code>GET</code> after <code>DESTROY</code>.
+Otherwise Turbo generates a new <code>DELETE</code> request. For example:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">First Request</th>
+<th class="tableblock halign-left valign-top">Turbo answer</th>
+<th class="tableblock halign-left valign-top">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETE /posts/1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETE /posts</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Error</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETE /posts/1/comment/1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DELETE /posts/1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Post(1) gets deleted too</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For more informations, see
+<a href="https://github.com/hotwired/turbo/issues/84" class="bare">https://github.com/hotwired/turbo/issues/84</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As long Rails uses 302 instead of 302 here, you have to made a choice:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>set the correct redirect code in each controller (yeah, don&#8217;t like it too)</p>
+</li>
+<li>
+<p>Catch the response and change it for get requests (see below)</p>
+</li>
+<li>
+<p>use <code>button_to</code> instead of <code>link_to</code></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Solve the 302/303 dilemma</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class ApplicationController &lt; ActionController::Base
+  def redirect_to(url_options = {}, response_options = {})
+    response_options[:status] ||= :see_other unless request.get?
+    super url_options, response_options
+  end
+end</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See
+<a href="https://github.com/heartcombo/responders/issues/227#issuecomment-984367557" class="bare">https://github.com/heartcombo/responders/issues/227#issuecomment-984367557</a></p>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <span>Wolfgang Barth (C) 2021</span>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+<script src="../../_/js/vendor/medium-zoom.min.js"></script>
+<script>mediumZoom('img:not(.copy-icon');</script>
+  </body>
+</html>
