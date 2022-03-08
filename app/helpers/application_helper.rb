@@ -27,6 +27,7 @@ module ApplicationHelper
     button_to(raw(%Q[<i class="fas fa-trash-alt"></i>]), obj,
             method: :delete,
             target: '_top',
+            form: { 'data-turbo-confirm': 'Are you sure?' },
             class: 'btn btn-danger me-1')
   end
 end
