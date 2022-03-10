@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Stimulus Controller to initialize Bootstrap Toast :: Rails Playbook</title>
+    <title>Stimulus Controller for SlimSelect :: Rails Playbook</title>
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -49,19 +49,19 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Flash/Alert</a>
+    <a class="nav-link" href="../flash/index.html">Flash/Alert</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="remove-js.html">Javascript</a>
+    <a class="nav-link" href="../flash/remove-js.html">Javascript</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="toast.html">Flash/Toast</a>
+    <a class="nav-link" href="../flash/toast.html">Flash/Toast</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="toast-js.html">Javascript</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../flash/toast-js.html">Javascript</a>
   </li>
 </ul>
   </li>
@@ -123,8 +123,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Rails Playbook</a></li>
-    <li><a href="toast.html">Flash/Toast</a></li>
-    <li><a href="toast-js.html">Javascript</a></li>
+    <li><a href="slim-select-js.html">Stimulus Controller for SlimSelect</a></li>
   </ul>
 </nav>
 </div>
@@ -133,46 +132,69 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Stimulus Controller to initialize Bootstrap Toast</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>Bootstrap Toasts are opt-in, so you must initialize them yourself. See
-<a href="https://getbootstrap.com/docs/5.1/components/toasts/#overview" class="bare">https://getbootstrap.com/docs/5.1/components/toasts/#overview</a></p>
-</div>
-</div>
-</div>
+<h1 class="page">Stimulus Controller for SlimSelect</h1>
 <div class="sect1">
-<h2 id="_the_complete_controller"><a class="anchor" href="#_the_complete_controller"></a>The complete controller</h2>
+<h2 id="_stimulus_controller"><a class="anchor" href="#_stimulus_controller"></a>Stimulus controller</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_the_complete_controller"><a class="anchor" href="#_the_complete_controller"></a>The complete controller</h3>
 <div class="listingblock">
-<div class="title">app/javascript/controllers/toast_controller.js</div>
+<div class="title">node_modules/@swobspace/stimulus-slim-select/stimulus-slim-select.js</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import { Controller } from "@hotwired/stimulus"
-import { Toast } from "bootstrap"
+import SlimSelect from "slim-select"
 
-// Connects to data-controller="toast"
 export default class extends Controller {
+  static values = { url: String }
+
   connect() {
-    console.log("toast#connect")
-    this.toast = new bootstrap.Toast(this.element)
-    this.toast.show()
+    // set basic options
+    let options = { 
+      select: this.element,
+      allowDeselect: true
+    }
+
+    // check if url is present -&gt; fetch via ajax
+    if (this.hasUrlValue) {
+      let _this = this
+      options.ajax = function (search, callback) {
+        if (search.length &lt; 3) {
+          callback('Bitte geben Sie mind. 3 Buchstaben ein...')
+          return
+        }
+
+        let url = new URL(_this.urlValue)
+        url.search = new URLSearchParams({ q: search })
+
+        fetch(url)
+          .then(response =&gt; response.json())
+          .then(json =&gt; callback(json))
+          .catch(error =&gt; callback(error))
+      }
+    }
+
+    new SlimSelect(options)
   }
 }</code></pre>
 </div>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you want to change the animation, set options in <code>new bootstrap.Toast</code>.
-Default is <code>animation: true</code>, <code>autohide: true</code>, <code>delay: 5000</code>.
-</td>
-</tr>
-</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">yarn add https://github.com/swobspace/stimulus-slim-select.git</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">app/javascript/controllers/index.js</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import SelectController from "@swobspace/stimulus-slim-select"
+application.register("select", SelectController)</code></pre>
+</div>
 </div>
 </div>
 </div>
