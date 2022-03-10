@@ -1,0 +1,27 @@
+= Stimulus Controller for SlimSelect
+:navtitle: Javascript
+:imagesdir: ../../images
+
+== Stimulus controller
+
+=== The complete controller
+
+.node_modules/@swobspace/stimulus-slim-select/stimulus-slim-select.js
+[source,javascript]
+----
+include::example$@swobspace/stimulus-slim-select/stimulus-slim-select.js[]
+----
+
+== Installation
+
+[source,sh]
+----
+yarn add https://github.com/swobspace/stimulus-slim-select.git
+----
+
+.app/javascript/controllers/index.js
+[source,javascript]
+----
+import SelectController from "@swobspace/stimulus-slim-select"
+application.register("select", SelectController)
+----

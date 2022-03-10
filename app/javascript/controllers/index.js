@@ -21,3 +21,6 @@ application.register("sortable", SortableController)
 
 import ToastController from "./toast_controller.js"
 application.register("toast", ToastController)
+
+import SelectController from "@swobspace/stimulus-slim-select"
+application.register("select", SelectController)
