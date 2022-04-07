@@ -1,0 +1,73 @@
+= Font Awesome
+:imagesdir: ../../images
+
+* Source Repository: {github}
+* Font Awesome: https://fontawesome.com
+
+The goal: get font awesome with cssbundling-rails and jsbundling-rails working
+
+== Webfonts or SVG ?
+
+First of all you need to make a descision if you want to use the CSS aproach
+(free of javascript) or Javascript with SVG based icons, perfect for scaling
+and other fancy stuff. A comparision is here:
+https://fontawesome.com/docs/web/dig-deeper/webfont-vs-svg.
+
+== Installation
+
+----
+yarn add @fortawesome/fontawesome-free@5
+----
+
+NOTE: for fontawesome v6 omit the version `@5`.
+
+== Webfonts and CSS
+
+
+../app/assets/config/manifest.js: link directly to the package webfont dir in node_modules
+[source]
+----
+//= link_tree ../../../node_modules/@fortawesome/fontawesome-free/webfonts
+----
+
+../config/initializers/assets.rb
+[source,ruby]
+----
+Rails.application.config.assets.paths << Rails.root.join('node_modules')
+----
+
+../app/assets/stylesheets/application.bootstrap.scss
+[source,scss]
+----
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts'; <!--1-->
+@import '@fortawesome/fontawesome-free/scss/fontawesome'; <!--2-->
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/v4-shims'; <!--3-->
+----
+<1> set the font path to the subdirectory from node_modules
+<2> using `scss` `fontawesome` comes first (always before the icons)
+<3> only neccessary if you wan't compatibility to version 4
+
+=== Test configuration for production environment
+
+IMPORTANT: To simulate a production environment you need a production database too. Check `config/database.yml` for your concrete setup.
+
+.precompile assets for production
+[source]
+----
+bin/rails tmp:clear assets:clobber assets_precompile
+RAILS_ENV=production RAILS_SERVE_STATIC_FILES=true rails server
+----
+...and now call http://localhost:3000 in your browser and check if all icons are visible.
+
+== Javascript and SVG
+
+..app/javascript/application.js
+[source,javascript]
+----
+import "@fortawesome/fontawesome-free/js/all.js"
+----
+
+Yes, that's all. No CSS stuff, no entry in `assets/config/manifest.js`.

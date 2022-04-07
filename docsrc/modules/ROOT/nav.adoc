@@ -10,3 +10,4 @@
 ** xref:sortable/sortable-js.adoc[]
 * xref:turbo/index.adoc[]
 ** xref:turbo/delete-button.adoc[]
+* xref:fontawesome/index.adoc[]

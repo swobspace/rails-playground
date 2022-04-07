@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>A stimulus sortable controller :: Rails Playbook</title>
+    <title>Font Awesome :: Rails Playbook</title>
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -74,12 +74,12 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Sortable</a>
+    <a class="nav-link" href="../sortable/index.html">Sortable</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="sortable-js.html">Javascript</a>
+    <a class="nav-link" href="../sortable/sortable-js.html">Javascript</a>
   </li>
 </ul>
   </li>
@@ -92,8 +92,8 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../fontawesome/index.html">Font Awesome</a>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Font Awesome</a>
   </li>
 </ul>
   </li>
@@ -126,7 +126,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Rails Playbook</a></li>
-    <li><a href="index.html">Sortable</a></li>
+    <li><a href="index.html">Font Awesome</a></li>
   </ul>
 </nav>
 </div>
@@ -135,7 +135,7 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">A stimulus sortable controller</h1>
+<h1 class="page">Font Awesome</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="ulist">
@@ -144,123 +144,128 @@
 <p>Source Repository: <a href="https://github.com/swobspace/rails-playground" class="bare">https://github.com/swobspace/rails-playground</a></p>
 </li>
 <li>
-<p>Draggable/Sortable home page: <a href="https://shopify.github.io/draggable/" class="bare">https://shopify.github.io/draggable/</a></p>
-</li>
-<li>
-<p>Rails Playground: used in lists</p>
+<p>Font Awesome: <a href="https://fontawesome.com" class="bare">https://fontawesome.com</a></p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The goal: make a list of tasks sortable. <code>@shopify/draggable</code> takes the client part, turbostream re-renders the list after the update. The positioning in active record uses <code>acts_as_list</code>.</p>
+<p>The goal: get font awesome with cssbundling-rails and jsbundling-rails working</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_models"><a class="anchor" href="#_models"></a>Models</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class List &lt; ApplicationRecord
-  has_many :tasks, -&gt; { order(:position) }, dependent: :restrict_with_error
-
-  validates_presence_of :name
-
-  def to_s
-    "#{name}"
-  end
-end</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">class Task &lt; ApplicationRecord
-  default_scope { order(:position) }
-  belongs_to :list, optional: false
-
-  acts_as_list scope: :list
-  validates_presence_of :subject
-end</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_views"><a class="anchor" href="#_views"></a>Views</h2>
+<h2 id="_webfonts_or_svg"><a class="anchor" href="#_webfonts_or_svg"></a>Webfonts or SVG ?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following snippets shows only the relevant parts. For the full views please have a look as <code>rails-playground/app/views/lists</code> and <code>rails-playground/app/views/tasks</code>.</p>
+<p>First of all you need to make a descision if you want to use the CSS aproach
+(free of javascript) or Javascript with SVG based icons, perfect for scaling
+and other fancy stuff. A comparision is here:
+<a href="https://fontawesome.com/docs/web/dig-deeper/webfont-vs-svg" class="bare">https://fontawesome.com/docs/web/dig-deeper/webfont-vs-svg</a>.</p>
 </div>
-<div class="sect2">
-<h3 id="_listsshow_html_erb"><a class="anchor" href="#_listsshow_html_erb"></a>lists/show.html.erb</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;div id="list_tasks"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;%= render partial: 'lists/show', locals: { list: @list }%&gt;
-&lt;/div&gt;</code></pre>
+<pre>yarn add @fortawesome/fontawesome-free@5</pre>
 </div>
 </div>
-<div class="colist arabic">
+<div class="admonitionblock note">
 <table>
 <tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>a unique id use with <code>turbo_stream.update</code> in <code>app/views/tasks/update.turbo_stream.erb</code></td>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+for fontawesome v6 omit the version <code>@5</code>.
+</td>
 </tr>
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_lists_show_html_erb"><a class="anchor" href="#_lists_show_html_erb"></a>lists/_show.html.erb</h3>
+</div>
+<div class="sect1">
+<h2 id="_webfonts_and_css"><a class="anchor" href="#_webfonts_and_css"></a>Webfonts and CSS</h2>
+<div class="sectionbody">
 <div class="listingblock">
+<div class="title">./app/assets/config/manifest.js: link directly to the package webfont dir in node_modules</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;div data-controller="sortable"  <i class="conum" data-value="1"></i><b>(1)</b>
-     data-sortable-handle-value=".handle" <i class="conum" data-value="2"></i><b>(2)</b>
-     class="list-group mb-3"&gt;
-  &lt;%= render partial: 'tasks/task', collection: list.tasks, as: :task %&gt;
-&lt;/div&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">//= link_tree ../../../node_modules/@fortawesome/fontawesome-free/webfonts</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">./config/initializers/assets.rb</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">Rails.application.config.assets.paths &lt;&lt; Rails.root.join('node_modules')</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">./app/assets/stylesheets/application.bootstrap.scss</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-scss hljs" data-lang="scss">$fa-font-path: '@fortawesome/fontawesome-free/webfonts'; <i class="conum" data-value="1"></i><b>(1)</b>
+@import '@fortawesome/fontawesome-free/scss/fontawesome'; <i class="conum" data-value="2"></i><b>(2)</b>
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/v4-shims'; <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>initialize the sortable controller</td>
+<td>set the font path to the subdirectory from node_modules</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>optional: set handle to restrict draggable to some parts of your item.</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_tasks_task_html_erb"><a class="anchor" href="#_tasks_task_html_erb"></a>tasks/_task.html.erb</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-erb hljs" data-lang="erb">&lt;div id="&lt;%= dom_id task %&gt;"  <i class="conum" data-value="1"></i><b>(1)</b>
-     class="list-group-item"
-     data-sortable-target="item" <i class="conum" data-value="2"></i><b>(2)</b>
-     data-url="&lt;%= polymorphic_path([task.list, task])%&gt;" <i class="conum" data-value="3"></i><b>(3)</b>
-&gt;
-...</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>id must be dom_id(task)</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>stimulus target is <code>item</code>.</td>
+<td>using <code>scss</code> <code>fontawesome</code> comes first (always before the icons)</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>path for update via PUT</td>
+<td>only neccessary if you wan&#8217;t compatibility to version 4</td>
 </tr>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_test_configuration_for_production_environment"><a class="anchor" href="#_test_configuration_for_production_environment"></a>Test configuration for production environment</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+To simulate a production environment you need a production database too. Check <code>config/database.yml</code> for your concrete setup.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">precompile assets for production</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">bin/rails tmp:clear assets:clobber assets_precompile
+RAILS_ENV=production RAILS_SERVE_STATIC_FILES=true rails server</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;and now call <a href="http://localhost:3000" class="bare">http://localhost:3000</a> in your browser and check if all icons are visible.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_javascript_and_svg"><a class="anchor" href="#_javascript_and_svg"></a>Javascript and SVG</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">.app/javascript/application.js</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import "@fortawesome/fontawesome-free/js/all.js"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yes, that&#8217;s all. No CSS stuff, no entry in <code>assets/config/manifest.js</code>.</p>
 </div>
 </div>
 </div>
