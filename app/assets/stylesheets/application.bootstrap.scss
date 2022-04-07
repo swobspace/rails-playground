@@ -5,8 +5,9 @@
 @import 'datatables.net-buttons-bs5/css/buttons.bootstrap5';
 // @import 'actiontext';
 @import 'actiontext.css';
+
 // @import 'flatpickr/dist/flatpickr';
-$fa-font-path: 'fawefonts';
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/solid';
