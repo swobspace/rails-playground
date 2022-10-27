@@ -25,6 +25,14 @@ button_to 'Destroy', @post,
           form: { 'data-turbo-confirm': 'Are you sure?' }
 ----
 
+.show button_to like a bootstrap link button
+[source,css]
+----
+form.button_to {
+  display: inline-block;
+}
+----
+
 == link_to
 
 Pros::
