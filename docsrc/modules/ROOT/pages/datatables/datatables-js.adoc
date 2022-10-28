@@ -27,3 +27,35 @@ include::example$app/javascript/src/jquery.js[]
 ----
 include::example$app/javascript/src/datatables-bs5.js[]
 ----
+
+
+== Troubleshooting
+
+=== Remote processing and authentication
+
+If you are receiving a 406 "not acceptable" error, have a look at your logfile. If it says
+
+----
+ Can't verify CSRF token authenticity.
+----
+
+you need to add the CSRF-token to the POST request:
+
+.datatables-controller.js
+[source,js]
+----
+  ...
+  remoteOptions(options) {
+    let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    options.searchDelay = 400
+    options.processing = true
+    options.serverSide = true
+    options.ajax = {
+      'url': this.urlValue,
+      'type': 'POST',
+      'beforeSend': function(request) {
+        request.setRequestHeader("X-CSRF-Token", token)
+      }
+    }
+  }
+----
