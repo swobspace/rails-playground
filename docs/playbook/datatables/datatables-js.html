@@ -154,10 +154,6 @@ export default class extends Controller {
   }
 
   initialize() {
-    var myTable = $.fn.dataTable;
-    $.extend( true, myTable.Buttons.defaults, {
-      "dom": { "button": { "className": 'btn btn-outline-secondary btn-sm' } }
-    })
   }
 
   connect() {
@@ -225,21 +221,29 @@ export default class extends Controller {
     options.dom = "&lt;'row'&lt;'col'l&gt;&lt;'col'B&gt;&lt;'col'f&gt;&gt;" +
                     "&lt;'row'&lt;'col-sm-12'tr&gt;&gt;" +
                     "&lt;'row'&lt;'col'i&gt;&lt;'col'p&gt;&gt;"
-    options.buttons = [ { "extend": 'copy',
-	                  "exportOptions": {
-	                    "columns": ':visible',
-	                    "search": ':applied' } },
-                        { "extend": 'csv',
-	                  "exportOptions": { "search": ':applied' } },
-                        { "extend": 'excel',
-	                  "exportOptions": { "search": ':applied' } },
-                        { "extend": 'pdf',
-	                  "orientation": 'landscape',
-	                  "pageSize": 'A4',
-	                  "exportOptions": { "columns": ':visible',
-	                                     "search": ':applied' } },
-                        { "extend": 'print'},
-                        { "extend": 'colvis', "columns": ':gt(0)' } ]
+    options.buttons = {
+      dom: {
+        button: {
+          tag: 'button',
+          className: 'btn btn-outline-secondary btn-sm'
+        }
+      },
+      buttons: [ { "extend": 'copy',
+	           "exportOptions": {
+	           "columns": ':visible',
+	           "search": ':applied' } },
+                 { "extend": 'csv',
+	           "exportOptions": { "search": ':applied' } },
+                 { "extend": 'excel',
+	           "exportOptions": { "search": ':applied' } },
+                 { "extend": 'pdf',
+	           "orientation": 'landscape',
+	           "pageSize": 'A4',
+	           "exportOptions": { "columns": ':visible',
+	                              "search": ':applied' } },
+                 { "extend": 'print'},
+                 { "extend": 'colvis', "columns": ':gt(0)' } ]
+    }
   }
 
   remoteOptions(options) {
@@ -283,21 +287,11 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-
-import DataTable from 'datatables.net-bs5'
-window.DataTable = DataTable()
-
-import buttons from 'datatables.net-buttons-bs5'
-buttons(window, $)
-
-import columnVisibility from 'datatables.net-buttons/js/buttons.colVis.js'
-columnVisibility(window, $)
-
-import buttonsHtml5 from 'datatables.net-buttons/js/buttons.html5.js'
-buttonsHtml5(window, $)
-
-import buttonsPrint from 'datatables.net-buttons/js/buttons.print.js'
-buttonsPrint(window, $)</code></pre>
+require('datatables.net-bs5')();
+require('datatables.net-buttons-bs5')();
+require('datatables.net-buttons/js/buttons.colVis.js' )();
+require('datatables.net-buttons/js/buttons.html5.js' )();
+require('datatables.net-buttons/js/buttons.print.js' )();</code></pre>
 </div>
 </div>
 </div>
