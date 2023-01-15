@@ -1,10 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @category %>
-
-<div>
+<div class="mb-3">
   <%= link_to "Edit this category", edit_category_path(@category) %> |
   <%= link_to "Back to categories", categories_path %>
 
   <%= button_to "Destroy this category", @category, method: :delete %>
 </div>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h3 class="card-title">Category: <%= @category.name %> </h3>
+  </div>
+  <div class="card-body">
+    <%= render 'people/index', people: @category.people %>
+  </div>
+</div>
+<h3>

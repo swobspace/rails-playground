@@ -3,12 +3,39 @@
 <h1>Categories</h1>
 
 <div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
-  <% end %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "categories_table",
+          class: "table table-responsive-xl",
+          data: {
+            order: [[0, 'desc']].to_json
+          } do %>
+      <thead>
+        <tr class="search">
+          <th><%= t('attributes.name') %></th>
+          <th class="nosort actions" style="width: 5%;"><%= t('mirco.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @categories.each do |category| %>
+          <%= content_tag(:tr, id: dom_id(category), class: dom_class(category)) do %>
+            <td><%= category.name %></td>
+            <td class="text-nowrap">
+              <%= show_link category %>
+              <%= edit_link category %>
+              <%= delete_link category %>
+            </td>
+          <% end %>
+        <% end %>
+      </tbody>
+    <% end %>
+  </div>
 </div>
 
 <%= link_to "New category", new_category_path %>
