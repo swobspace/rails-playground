@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "~> 3.0.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.1"
+gem "rails", "~> 7.0.4"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -13,7 +13,7 @@ gem "sprockets-rails"
 gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma", "~> 6.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
@@ -28,7 +28,7 @@ gem "stimulus-rails"
 gem "cssbundling-rails"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -65,16 +65,16 @@ group :development do
 end
 
 
-gem "faker", "~> 2.19"
+gem "faker", "~> 3.0"
 
 gem "simple_form", "~> 5.1"
 
-gem "pagy", "~> 5.10"
+gem "pagy", "~> 6.0"
 
 gem 'responders', github: 'heartcombo/responders', branch: 'main'
 
 
-gem "prawn-html", "~> 0.6.2"
+gem "prawn-html", "~> 0.7.1"
 
 gem "acts_as_list", "~> 1.0"
 
