@@ -1,0 +1,12 @@
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarCategoriesDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Categories
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarCategoriesDropdown">
+    <%= link_to raw(%Q[<i class="fas fa-fw fa-table"></i> Categories]), categories_path, 
+        class: "dropdown-item" %>
+    <%= link_to raw(%Q[<i class="fas fa-fw fa-plus"></i> New Category]), new_category_path,
+        class: "dropdown-item" %>
+  </div>
+</li>
+
