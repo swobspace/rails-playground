@@ -16,10 +16,8 @@ https://fontawesome.com/docs/web/dig-deeper/webfont-vs-svg.
 == Installation
 
 ----
-yarn add @fortawesome/fontawesome-free@5
+yarn add @fortawesome/fontawesome-free
 ----
-
-NOTE: for fontawesome v6 omit the version `@5`.
 
 == Webfonts and CSS
 
@@ -33,13 +31,13 @@ NOTE: for fontawesome v6 omit the version `@5`.
 ../config/initializers/assets.rb
 [source,ruby]
 ----
-Rails.application.config.assets.paths << Rails.root.join('node_modules')
+Rails.application.config.assets.paths << Rails.root.join('node_modules/@fortawesome/fontawesome-free/webfonts')
 ----
 
 ../app/assets/stylesheets/application.bootstrap.scss
 [source,scss]
 ----
-$fa-font-path: '@fortawesome/fontawesome-free/webfonts'; <!--1-->
+$fa-font-path: '.'; <!--1-->
 @import '@fortawesome/fontawesome-free/scss/fontawesome'; <!--2-->
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/solid';
