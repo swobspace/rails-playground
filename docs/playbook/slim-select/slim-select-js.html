@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Stimulus Controller for SlimSelect :: Rails Playbook</title>
-    <meta name="generator" content="Antora 3.0.0">
+    <meta name="generator" content="Antora 3.1.2">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
   </head>
@@ -144,41 +144,7 @@
 <div class="listingblock">
 <div class="title">node_modules/@swobspace/stimulus-slim-select/stimulus-slim-select.js</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import { Controller } from "@hotwired/stimulus"
-import SlimSelect from "slim-select"
-
-export default class extends Controller {
-  static values = { url: String }
-
-  connect() {
-    // set basic options
-    let options = { 
-      select: this.element,
-      allowDeselect: true
-    }
-
-    // check if url is present -&gt; fetch via ajax
-    if (this.hasUrlValue) {
-      let _this = this
-      options.ajax = function (search, callback) {
-        if (search.length &lt; 3) {
-          callback('Bitte geben Sie mind. 3 Buchstaben ein...')
-          return
-        }
-
-        let url = new URL(_this.urlValue)
-        url.search = new URLSearchParams({ q: search })
-
-        fetch(url)
-          .then(response =&gt; response.json())
-          .then(json =&gt; callback(json))
-          .catch(error =&gt; callback(error))
-      }
-    }
-
-    new SlimSelect(options)
-  }
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">Unresolved include directive in modules/ROOT/pages/slim-select/slim-select-js.adoc - include::example$@swobspace/stimulus-slim-select/stimulus-slim-select.js[]</code></pre>
 </div>
 </div>
 </div>
