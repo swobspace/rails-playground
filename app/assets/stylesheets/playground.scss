@@ -1,7 +1,7 @@
 // set primary color before importing bootstrap
 $primary: #137970;
 @import 'bootstrap/scss/bootstrap';
-@import 'flash-animation';
+@import 'flash-animation.scss';
 
 // -- add some space after bootstrap navbar
 body {

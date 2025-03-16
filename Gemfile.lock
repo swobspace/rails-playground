@@ -171,6 +171,11 @@ GEM
       oga (~> 3.3)
       prawn (~> 2.4)
     prettyprint (0.2.0)
+    propshaft (1.1.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     psych (5.2.3)
       date
       stringio
@@ -233,13 +238,6 @@ GEM
     simple_form (5.3.1)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    sprockets (4.2.1)
-      concurrent-ruby (~> 1.0)
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.5.2)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      sprockets (>= 3.0.0)
     sqlite3 (1.7.3)
       mini_portile2 (~> 2.8.0)
     sqlite3 (1.7.3-x86_64-linux)
@@ -286,12 +284,12 @@ DEPENDENCIES
   jsbundling-rails
   pagy (~> 6.0)
   prawn-html (~> 0.7.1)
+  propshaft
   puma (~> 6.0)
   rails (~> 7.2.0)
   redis (~> 5.0)
   responders!
   simple_form (~> 5.1)
-  sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
   turbo-rails
