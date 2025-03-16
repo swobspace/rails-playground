@@ -6,7 +6,7 @@
     "@hotwired/stimulus": "^3.0.1",
     "@hotwired/turbo-rails": "^8.0.4",
     "@popperjs/core": "^2.11.2",
-    "@rails/actiontext": "^7.0.2",
+    "@rails/actiontext": "^7.1.0",
     "@shopify/draggable": "^1.0.0-beta.8",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
