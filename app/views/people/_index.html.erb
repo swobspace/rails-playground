@@ -9,7 +9,7 @@
         <th>City</th>
         <th class="notvisible">Active</th>
         <th class="notvisible">Category</th>
-        <th class="nosort">Actions</th>
+        <th class="text-center nosort">Actions</th>
       </tr>
     </thead>
     <tfoot class="search">
@@ -34,7 +34,7 @@
           <td><%= person.city %></td>
           <td><%= person.active %></td>
           <td><%= person.category %></td>
-          <td class="d-flex flex-nowrap">
+          <td class="text-center nowrap">
             <%= show_link(person) %>
             <%= edit_link(person) %>
             <%= delete_link(person) %>
