@@ -17,5 +17,14 @@ FactoryBot.define do
     subject { Faker::Lorem.words(number: 4).join(" ") }
     content { Faker::Lorem.sentences(number: 3).join(" ") }
   end
+
+  factory :list do
+    name { generate(:aname) }
+  end
+
+  factory :task do
+    list
+    subject { Faker::Lorem.words(number: 4).join(" ") }
+  end
 end
 
