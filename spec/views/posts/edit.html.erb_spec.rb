@@ -4,7 +4,7 @@ RSpec.describe "posts/edit", type: :view do
   let(:post) {
     Post.create!(
       subject: "MyString",
-      content: nil
+      content: "some text"
     )
   }
 

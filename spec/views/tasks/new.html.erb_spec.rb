@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "tasks/new", type: :view do
   before(:each) do
-    assign(:task, Task.new(
+    assign(:task, FactoryBot.build(:task,
       subject: "MyString",
       position: 1,
-      list: nil
     ))
   end
 
@@ -18,7 +17,7 @@ RSpec.describe "tasks/new", type: :view do
 
       assert_select "input[name=?]", "task[position]"
 
-      assert_select "input[name=?]", "task[list_id]"
+      assert_select "select[name=?]", "task[list_id]"
     end
   end
 end

@@ -4,7 +4,7 @@ RSpec.describe "posts/new", type: :view do
   before(:each) do
     assign(:post, Post.new(
       subject: "MyString",
-      content: nil
+      content: "some text"
     ))
   end
 

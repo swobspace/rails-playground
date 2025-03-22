@@ -5,19 +5,19 @@ RSpec.describe "posts/index", type: :view do
     assign(:posts, [
       Post.create!(
         subject: "Subject",
-        content: nil
+        content: "some text"
       ),
       Post.create!(
         subject: "Subject",
-        content: nil
+        content: "some text"
       )
     ])
   end
 
   it "renders a list of posts" do
     render
-    cell_selector = 'div>p'
+    cell_selector = 'tr>td'
     assert_select cell_selector, text: Regexp.new("Subject".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("some text".to_s), count: 2
   end
 end

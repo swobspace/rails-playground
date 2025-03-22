@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "tasks/edit", type: :view do
   let(:task) {
-    Task.create!(
+    FactoryBot.create(:task,
       subject: "MyString",
       position: 1,
-      list: nil
     )
   }
 
@@ -22,7 +21,7 @@ RSpec.describe "tasks/edit", type: :view do
 
       assert_select "input[name=?]", "task[position]"
 
-      assert_select "input[name=?]", "task[list_id]"
+      assert_select "select[name=?]", "task[list_id]"
     end
   end
 end

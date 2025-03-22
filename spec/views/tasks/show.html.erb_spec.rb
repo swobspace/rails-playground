@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "tasks/show", type: :view do
+  let(:list) { FactoryBot.create(:list, name: "MyList") }
   before(:each) do
-    assign(:task, Task.create!(
+    assign(:task, FactoryBot.create(:task,
       subject: "Subject",
       position: 2,
-      list: nil
+      list_id: list.id
     ))
   end
 
@@ -13,6 +14,6 @@ RSpec.describe "tasks/show", type: :view do
     render
     expect(rendered).to match(/Subject/)
     expect(rendered).to match(/2/)
-    expect(rendered).to match(//)
+    expect(rendered).to match(/MyList/)
   end
 end
