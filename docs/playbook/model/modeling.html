@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Stimulus Controller for Bootstrap Modal :: Rails Playbook</title>
+    <title>Modeling rails-playground :: Rails Playbook</title>
     <meta name="generator" content="Antora 3.1.10">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -67,10 +67,10 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Modal</a>
+    <a class="nav-link" href="../modal/index.html">Modal</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="modal-js.html">Javascript</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../modal/modal-js.html">Javascript</a>
   </li>
 </ul>
   </li>
@@ -126,8 +126,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Rails Playbook</a></li>
-    <li><a href="index.html">Modal</a></li>
-    <li><a href="modal-js.html">Javascript</a></li>
+    <li><a href="modeling.html">Modeling rails-playground</a></li>
   </ul>
 </nav>
 </div>
@@ -136,91 +135,43 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Stimulus Controller for Bootstrap Modal</h1>
+<h1 class="page">Modeling rails-playground</h1>
 <div class="sect1">
-<h2 id="_stimulus_controller"><a class="anchor" href="#_stimulus_controller"></a>Stimulus controller</h2>
+<h2 id="_overall_picture"><a class="anchor" href="#_overall_picture"></a>Overall Picture</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../_images/model/models.svg" alt="models">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_person"><a class="anchor" href="#_person"></a>Person</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">connect() {
-  this.modal = new bootstrap.Modal(this.element)
-  this.modal.show() <i class="conum" data-value="1"></i><b>(1)</b>
-}</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Person \
+  sn:string \
+  givenname:string \
+  username:string \
+  birthdate:date \
+  city:string \
+  active:boolean \
+  category:belongs_to \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Auto-open modal on connect</td>
-</tr>
-</table>
 </div>
-<div class="sect2">
-<h3 id="_close_function"><a class="anchor" href="#_close_function"></a>#close function</h3>
+</div>
+<div class="sect1">
+<h2 id="_model_category"><a class="anchor" href="#_model_category"></a>model Category</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">close() {
-  this.modal.hide()
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_catch_turbo_submitend_event"><a class="anchor" href="#_catch_turbo_submitend_event"></a>catch turbo-submit:end event</h3>
-<div class="listingblock">
-<div class="title">close modal after form submit</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">  handleSubmit = (event) =&gt; {
-    if (event.detail.success) {
-      console.log("modal#handleSubmit successful")
-      // may be do some other stuff here ....;
-    }
-    // always close modal after form submit
-    this.close()
-  }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>&lt;1&gt;</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_the_complete_controller"><a class="anchor" href="#_the_complete_controller"></a>The complete controller</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-
-  // auto-open modal on connect
-  connect() {
-    console.log("modal#connect")
-    this.modal = new bootstrap.Modal(this.element)
-    this.modal.show()
-  }
-
-  disconnect() {
-    console.log("modal#disconnect")
-  }
-
-  close() {
-    console.log("modal#close")
-    this.modal.hide()
-  }
-
-  // catch turbo:submit-end via action 
-  handleSubmit = (event) =&gt; {
-    console.log("modal#handleSubmit")
-    // close modal if form submission is successful
-    if (event.detail.success) {
-      console.log("modal#handleSubmit event successful")
-    }
-    this.close()
-  }
-
-}</code></pre>
-</div>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Category \
+  name:string \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
 </div>
 </div>
 </div>

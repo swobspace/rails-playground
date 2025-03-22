@@ -1,0 +1,22 @@
+@startuml
+top to bottom direction
+
+!theme railspg from ..
+
+class Person {
+  sn:string
+  givenname:string
+  username:string
+  birthdate:date
+  city:string
+  active:boolean
+  category:belongs_to
+}
+
+class Category {
+  name:string
+}
+
+Category "1" - "*" Person
+
+@enduml

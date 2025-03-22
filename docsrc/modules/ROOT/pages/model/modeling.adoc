@@ -1,0 +1,32 @@
+= Modeling rails-playground
+:author: Wolfgang Barth
+:revdate: 2025-03-22
+:imagesdir: ../../images
+
+== Overall Picture
+
+image::model/models.svg[]
+
+== Person
+
+[source,sh]
+----
+bin/rails g scaffold Person \
+  sn:string \
+  givenname:string \
+  username:string \
+  birthdate:date \
+  city:string \
+  active:boolean \
+  category:belongs_to \
+  --no-stylesheets --no-javascripts --no-helper
+----
+
+== model Category
+
+[source,sh]
+----
+bin/rails g scaffold Category \
+  name:string \
+  --no-stylesheets --no-javascripts --no-helper
+----

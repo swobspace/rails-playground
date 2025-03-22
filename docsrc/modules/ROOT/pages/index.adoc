@@ -4,9 +4,10 @@ A Rails playground for testing stimulus, javascript and new rails features like 
 
 The stack for this application::
 
-* rails 7.0
+* rails 7.2
 * jssbundling-rails with esbuild
 * cssbundling-rails
+* propshaft
 * Bootstrap 5.x
 * simple_form
 
