@@ -12,5 +12,10 @@ FactoryBot.define do
   factory :category do
     name { generate(:aname) }
   end
+
+  factory :post do
+    subject { Faker::Lorem.words(number: 4).join(" ") }
+    content { Faker::Lorem.sentences(number: 3).join(" ") }
+  end
 end
 
