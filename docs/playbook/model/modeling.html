@@ -176,6 +176,45 @@
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_model_post"><a class="anchor" href="#_model_post"></a>model Post</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Post \
+  subject:string \
+  content:rich_text \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_list"><a class="anchor" href="#_model_list"></a>model List</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold List \
+  name:string \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_model_task"><a class="anchor" href="#_model_task"></a>model Task</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">bin/rails g scaffold Task \
+  subject:string \
+  position:integer \
+  list:belongs_to \
+  --no-stylesheets --no-javascripts --no-helper</code></pre>
+</div>
+</div>
+</div>
+</div>
 </article>
   </div>
 </main>
