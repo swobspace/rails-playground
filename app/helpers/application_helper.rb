@@ -23,7 +23,9 @@ module ApplicationHelper
   end
 
   def delete_link(obj, opts = {})
+    item = Array(obj).last
     options = { method: :delete,
+                id: "delete_#{dom_id(item)}",
                 form: { 'data-turbo-confirm': 'Are you sure?' },
                 class: 'btn btn-danger me-1' }.merge(opts)
     button_to(raw(%Q[<i class="fas fa-trash-alt"></i>]), obj, options)

@@ -2,7 +2,7 @@
 
 <h1><%= t('controller.tasks') %></h1>
 
-<%= turbo_frame_tag('tasks') do %>
+<%= turbo_frame_tag('tasks', refresh: 'morph') do %>
   <div data-controller="datatables">
     <%= content_tag :table, role: :datatable,
           id: "tasks_table",

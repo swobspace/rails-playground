@@ -2,39 +2,41 @@
 
 <h1><%= t('controller.lists') %></h1>
 
-<div data-controller="datatables">
-  <%= content_tag :table, role: :datatable,
-        id: "lists_table",
-        class: "table table-responsive-xl",
-        data: {
-          order: [[0, 'desc']].to_json
-        } do %>
-    <thead>
-      <tr class="search">
-        <th><%= t('attributes.name') %></th>
-        <th class="nosort actions" style="width: 5%;"><%= t('mirco.action') %></th>
-      </tr>
-    </thead>
-    <tfoot class="search">
-      <tr>
-        <th></th>
-        <th class="nosearch"></th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <% @lists.each do |list| %>
-        <%= content_tag(:tr, id: dom_id(list), class: dom_class(list)) do %>
-          <td><%= list.name %></td>
-          <td class="text-nowrap">
-            <%= show_link list %>
-            <%= edit_link list %>
-            <%= delete_link list %>
-          </td>
+<%= turbo_frame_tag 'lists', refresh: 'morph' do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "lists_table",
+          class: "table table-responsive-xl",
+          data: {
+            order: [[0, 'desc']].to_json
+          } do %>
+      <thead>
+        <tr class="search">
+          <th><%= t('attributes.name') %></th>
+          <th class="nosort actions"><%= t('mirco.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @lists.each do |list| %>
+          <%= content_tag(:tr, id: dom_id(list), class: dom_class(list)) do %>
+            <td><%= list.name %></td>
+            <td class="text-nowrap">
+              <%= show_link list, { target: '_top' } %>
+              <%= edit_link list, { target: '_top' } %>
+              <%= delete_link list %>
+            </td>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  <% end %>
-</div>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>
 
 <br />
 

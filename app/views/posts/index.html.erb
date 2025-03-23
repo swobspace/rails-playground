@@ -2,42 +2,44 @@
 
 <h1><%= t('controller.posts') %></h1>
 
-<div data-controller="datatables">
-  <%= content_tag :table, role: :datatable,
-        id: "posts_table",
-        class: "table table-responsive-xl",
-        data: {
-          order: [[0, 'desc']].to_json
-        } do %>
-    <thead>
-      <tr class="search">
-        <th><%= t('attributes.subject') %></th>
-        <th><%= t('attributes.content') %></th>
-        <th class="nosort actions"><%= t('mirco.action') %></th>
-      </tr>
-    </thead>
-    <tfoot class="search">
-      <tr>
-        <th></th>
-        <th></th>
-        <th class="nosearch"></th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <% @posts.each do |post| %>
-        <%= content_tag(:tr, id: dom_id(post), class: dom_class(post)) do %>
-          <td><%= post.subject %></td>
-          <td><%= post.content %></td>
-          <td class="text-nowrap">
-            <%= show_link post %>
-            <%= edit_link post %>
-            <%= delete_link post %>
-          </td>
+<%= turbo_frame_tag 'posts', refresh: 'morph' do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "posts_table",
+          class: "table table-responsive-xl",
+          data: {
+            order: [[0, 'desc']].to_json
+          } do %>
+      <thead>
+        <tr class="search">
+          <th><%= t('attributes.subject') %></th>
+          <th><%= t('attributes.content') %></th>
+          <th class="nosort actions"><%= t('mirco.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @posts.each do |post| %>
+          <%= content_tag(:tr, id: dom_id(post), class: dom_class(post)) do %>
+            <td><%= post.subject %></td>
+            <td><%= post.content %></td>
+            <td class="text-nowrap">
+              <%= show_link post, { target: '_top' } %>
+              <%= edit_link post, { target: '_top' } %>
+              <%= delete_link post %>
+            </td>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  <% end %>
-</div>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>
 
 <br />
 
