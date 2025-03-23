@@ -1,5 +1,6 @@
 // set primary color before importing bootstrap
 $primary: #137970;
+// use @import with bootstrap v5, @use may not be supported until v6
 @import 'bootstrap/scss/bootstrap';
 @import 'flash-animation.scss';
 

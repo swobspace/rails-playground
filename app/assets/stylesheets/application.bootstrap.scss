@@ -8,6 +8,7 @@
 @use 'playground.scss';
 
 // @import 'flatpickr/dist/flatpickr';
+// using @import for v6, @use may not be supported until v7
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
