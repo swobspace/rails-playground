@@ -29,7 +29,7 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules",
-    "build:css:fontawesome": "cp -r ./node_modules/@fortawesome/fontawesome-free/webfonts ./app/assets/builds/. && sass ./app/assets/stylesheets/fontawesome.scss ./app/assets/builds/fontawesome.css --no-source-map --load-path=node_modules --quiet"
+    "build:css": "sass ./app/assets/stylesheets/entrypoints:./app/assets/builds --no-source-map --load-path=node_modules",
+    "build:css:fontawesome": "cp -r ./node_modules/@fortawesome/fontawesome-free/webfonts ./app/assets/builds/."
   }
 }

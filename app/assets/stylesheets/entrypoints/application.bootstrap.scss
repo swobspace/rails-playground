@@ -3,9 +3,9 @@
 
 @use 'datatables.net-bs5/css/dataTables.bootstrap5';
 @use 'datatables.net-buttons-bs5/css/buttons.bootstrap5';
-@use 'actiontext.scss';
+@use '../sources/actiontext.scss';
 @use 'tom-select/dist/css/tom-select.bootstrap5';
-@use 'playground.scss';
+@use '../sources/playground.scss';
 
 // @import 'flatpickr/dist/flatpickr';
 
