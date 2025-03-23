@@ -1,11 +1,3 @@
 <%= render ModalComponent.new(title: 'Edit Task') do %>
   <%= render "form", task: @task %>
 <% end %>
-
-<br>
-
-<div>
-  <%= link_to "Show this task", @task %> |
-  <%= link_to "Back to tasks", tasks_path %>
-</div>
-

@@ -4,7 +4,7 @@
 
 <h1>Categories</h1>
 
-<div id="categories">
+<%= turbo_frame_tag 'categories', refresh: 'morph' do %>
   <div data-controller="datatables">
     <%= content_tag :table, role: :datatable,
           id: "categories_table",
@@ -15,7 +15,7 @@
       <thead>
         <tr class="search">
           <th><%= t('attributes.name') %></th>
-          <th class="nosort actions" style="width: 5%;"><%= t('mirco.action') %></th>
+          <th class="nosort actions"><%= t('mirco.action') %></th>
         </tr>
       </thead>
       <tfoot class="search">
@@ -29,8 +29,8 @@
           <%= content_tag(:tr, id: dom_id(category), class: dom_class(category)) do %>
             <td><%= category.name %></td>
             <td class="text-nowrap">
-              <%= show_link category %>
-              <%= edit_link category %>
+              <%= show_link category, { target: '_top' } %>
+              <%= edit_link category, { target: '_top' } %>
               <%= delete_link category %>
             </td>
           <% end %>
@@ -38,6 +38,6 @@
       </tbody>
     <% end %>
   </div>
-</div>
+<% end %>
 
-<%= link_to "New category", new_category_path %>
+<%= new_link Category %>

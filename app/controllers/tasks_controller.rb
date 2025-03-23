@@ -3,7 +3,11 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
+    if @list
+      @tasks = @list.tasks
+    else
+      @tasks = Task.all
+    end
     respond_with(@tasks)
   end
 

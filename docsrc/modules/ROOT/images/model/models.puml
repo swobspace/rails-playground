@@ -1,0 +1,39 @@
+@startuml
+top to bottom direction
+
+!theme railspg from ..
+
+class Person {
+  sn:string
+  givenname:string
+  username:string
+  birthdate:date
+  city:string
+  active:boolean
+  category:belongs_to
+}
+
+class Category {
+  name:string
+}
+
+class Post {
+  subject:string
+  content:rich_text
+}
+
+class List {
+  name:string
+}
+
+class Task {
+  subject:string
+  position:integer
+  list:belongs_to 
+}
+
+Category "1" - "*" Person
+List "1" - "*" Task
+Category -[hidden]- List
+
+@enduml

@@ -2,45 +2,47 @@
 
 <h1><%= t('controller.tasks') %></h1>
 
-<div data-controller="datatables">
-  <%= content_tag :table, role: :datatable,
-        id: "tasks_table",
-        class: "table table-responsive-xl",
-        data: {
-          order: [[0, 'asc']].to_json
-        } do %>
-    <thead>
-      <tr class="search">
-        <th><%= t('attributes.list') %></th>
-        <th class="text-center"><%= t('attributes.position') %></th>
-        <th><%= t('attributes.subject') %></th>
-        <th class="nosort actions"><%= t('mirco.action') %></th>
-      </tr>
-    </thead>
-    <tfoot class="search">
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th class="nosearch"></th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <% @tasks.each do |task| %>
-        <%= content_tag(:tr, id: dom_id(task), class: dom_class(task)) do %>
-          <td><%= task.list %></td>
-          <td class="text-center"><%= task.position %></td>
-          <td><%= task.subject %></td>
-          <td class="text-nowrap">
-            <%= show_link task %>
-            <%= edit_link task %>
-            <%= delete_link task %>
-          </td>
+<%= turbo_frame_tag('tasks', refresh: 'morph') do %>
+  <div data-controller="datatables">
+    <%= content_tag :table, role: :datatable,
+          id: "tasks_table",
+          class: "table table-responsive-xl",
+          data: {
+            order: [[0, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr class="search">
+          <th><%= t('attributes.list') %></th>
+          <th class="text-center"><%= t('attributes.position') %></th>
+          <th><%= t('attributes.subject') %></th>
+          <th class="nosort actions"><%= t('mirco.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @tasks.each do |task| %>
+          <%= content_tag(:tr, id: dom_id(task), class: dom_class(task)) do %>
+            <td><%= task.list %></td>
+            <td class="text-center"><%= task.position %></td>
+            <td><%= task.subject %></td>
+            <td class="text-nowrap">
+              <%= show_link [task.list, task], data: { "turbo-frame" => "modal" } %>
+              <%= edit_link [task.list, task], data: { "turbo-frame" => "modal" } %>
+              <%= delete_link [task.list, task] %>
+            </td>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  <% end %>
-</div>
+      </tbody>
+    <% end %>
+  </div>
+<% end %>
 
 <br />
 

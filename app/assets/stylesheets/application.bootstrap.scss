@@ -1,19 +1,19 @@
-// @use 'trix/dist/trix.css';
+@use 'trix/dist/trix.css';
 // @use 'jstree/dist/themes/default/style.css';
 
-@import 'datatables.net-bs5/css/dataTables.bootstrap5';
-@import 'datatables.net-buttons-bs5/css/buttons.bootstrap5';
-// @import 'actiontext';
-@import 'actiontext.css';
+@use 'datatables.net-bs5/css/dataTables.bootstrap5';
+@use 'datatables.net-buttons-bs5/css/buttons.bootstrap5';
+@use 'actiontext.scss';
+@use 'tom-select/dist/css/tom-select.bootstrap5';
+@use 'playground.scss';
 
 // @import 'flatpickr/dist/flatpickr';
+// using @import for v6, @use may not be supported until v7
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@fortawesome/fontawesome-free/scss/v4-shims';
-@import 'tom-select/dist/css/tom-select.bootstrap5';
 
 
-@import 'playground'

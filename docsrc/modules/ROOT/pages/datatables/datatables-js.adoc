@@ -28,6 +28,7 @@ include::example$app/javascript/src/jquery.js[]
 include::example$app/javascript/src/datatables-bs5.js[]
 ----
 
+////
 
 == Troubleshooting
 
@@ -59,3 +60,4 @@ you need to add the CSRF-token to the POST request:
     }
   }
 ----
+////
