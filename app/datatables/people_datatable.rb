@@ -45,7 +45,11 @@ class PeopleDatatable < ApplicationDatatable
   end
 
   def people_query
-    people = relation.order("#{sort_column} #{sort_direction}")
+    if params[:order]
+      people = relation.order("#{sort_column} #{sort_direction}")
+    else
+      people = relation
+    end
     people = PeopleQuery.new(people, search_params(params, search_columns)).all
   end
 
